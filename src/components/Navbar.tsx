@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Menu, X, Phone, Search } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,6 +37,9 @@ const Navbar = () => {
 
           {/* CTA buttons */}
           <div className="hidden md:flex items-center gap-3">
+            <a href="/student-login" className="inline-flex items-center gap-2 border border-border text-foreground text-sm font-medium py-2 px-4 rounded-lg hover:bg-muted transition-colors">
+              <User size={16} /> Student Login
+            </a>
             <a href="#apply" className="btn-navy text-sm py-2 px-5">Enquire Now</a>
             <a href="#apply" className="btn-gold text-sm py-2 px-5">Apply Now</a>
           </div>
@@ -55,6 +57,7 @@ const Navbar = () => {
             <a href="#why-us" className="block text-sm font-medium text-foreground">Why Us</a>
             <a href="#faq" className="block text-sm font-medium text-foreground">FAQ</a>
             <a href="#apply" className="block text-sm font-medium text-foreground">Contact</a>
+            <a href="/student-login" className="block text-sm font-medium text-foreground">Student Login</a>
             <a href="#apply" className="btn-gold text-sm py-2 px-5 inline-block">Apply Now</a>
           </div>
         )}

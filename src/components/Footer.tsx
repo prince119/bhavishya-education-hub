@@ -19,24 +19,31 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-primary mb-3">Programs</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/70">
-              <li>DCA</li><li>BCA</li><li>PGDCA</li><li>MA / BA / B.Com</li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">DCA</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">BCA</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">PGDCA</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">MA / BA / B.Com</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-heading font-semibold text-primary mb-3">Certificates</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/70">
-              <li>Tally Prime</li><li>MS Office</li><li>Web Design</li><li>Python</li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">Tally Prime</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">MS Office</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">Web Design</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">Python</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-heading font-semibold text-primary mb-3">Quick Links</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/70">
-              <li><a href="#courses" className="hover:text-primary transition-colors">Courses</a></li>
-              <li><a href="#why-us" className="hover:text-primary transition-colors">Why Us</a></li>
-              <li><a href="#faq" className="hover:text-primary transition-colors">FAQ</a></li>
-              <li><a href="#apply" className="hover:text-primary transition-colors">Apply Now</a></li>
+              <li><a href="/courses" className="hover:text-primary transition-colors">Courses</a></li>
+              <li><a href="/about" className="hover:text-primary transition-colors">About Us</a></li>
+              <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="/faq" className="hover:text-primary transition-colors">FAQ</a></li>
+              <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>

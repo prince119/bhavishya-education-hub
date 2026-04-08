@@ -10,6 +10,7 @@ import BlogSection from "@/components/BlogSection";
 import FAQSection from "@/components/FAQSection";
 import ApplyForm from "@/components/ApplyForm";
 import Footer from "@/components/Footer";
+import FloatingButtons from "@/components/FloatingButtons";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
       <FAQSection />
       <ApplyForm />
       <Footer />
+      <FloatingButtons />
     </div>
   );
 };

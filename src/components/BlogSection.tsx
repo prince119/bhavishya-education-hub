@@ -5,7 +5,7 @@ import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 import blog4 from "@/assets/blog-4.jpg";
 import blog5 from "@/assets/blog-5.jpg";
-import blog6 from "@/assets/blog-6.jpg";
+import blogPlacement from "@/assets/blog-placement.jpg";
 
 const blogs = [
   { img: blog1, category: "Career", title: "Top 5 IT Careers After Completing DCA", excerpt: "Discover the most in-demand IT career paths you can pursue after completing your Diploma in Computer Applications.", date: "Mar 28, 2026" },
@@ -13,7 +13,7 @@ const blogs = [
   { img: blog3, category: "Tips", title: "How to Ace Your First IT Job Interview", excerpt: "Practical tips from our placement cell on preparing for technical interviews and landing your dream IT role.", date: "Mar 15, 2026" },
   { img: blog4, category: "Technology", title: "Getting Started with Python Programming", excerpt: "A beginner-friendly guide to Python — the most versatile programming language for students and professionals alike.", date: "Mar 10, 2026" },
   { img: blog5, category: "Finance", title: "Understanding GST with Tally Prime", excerpt: "Learn how Tally Prime simplifies GST compliance and why it's a must-have skill for commerce students.", date: "Mar 5, 2026" },
-  { img: blog6, category: "Success", title: "Our Students Shine at Campus Placements", excerpt: "Bhavishya Education students secure top offers at leading companies. Read about their inspiring journeys.", date: "Feb 28, 2026" },
+  { img: blogPlacement, category: "Success", title: "Our Students Celebrate Campus Placements", excerpt: "Bhavishya Education students secure top offers at leading companies. Read about their inspiring journeys.", date: "Feb 28, 2026" },
 ];
 
 const categoryColors: Record<string, string> = {
@@ -33,11 +33,11 @@ const BlogSection = () => {
   };
 
   return (
-    <section className="py-16 bg-muted">
+    <section className="py-16" style={{ background: "linear-gradient(135deg, hsl(210 40% 96%), hsl(40 30% 96%))" }}>
       <div className="container mx-auto px-4">
         <div className="text-center space-y-3 mb-12">
           <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Blog</span>
-          <h2 className="section-heading">Latest from Our Blog</h2>
+          <h2 className="section-heading">Latest News & Blogs</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">Stay updated with the latest in technology, education tips, and career guidance.</p>
         </div>
 
@@ -62,7 +62,7 @@ const BlogSection = () => {
                   </div>
                   <h3 className="font-heading text-base font-semibold text-foreground leading-snug line-clamp-2">{b.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{b.excerpt}</p>
-                  <a href="#" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                  <a href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
                     Read More <ArrowRight size={14} />
                   </a>
                 </div>

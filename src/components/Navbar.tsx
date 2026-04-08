@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,19 +21,18 @@ const Navbar = () => {
           <a href="/" className="flex items-center gap-3">
             <img src={logo} alt="Bhavishya Computer Education" className="h-14 w-14 object-contain rounded" />
             <div className="hidden sm:block">
-              <h1 className="font-heading text-lg font-bold leading-tight text-charcoal">
-                Bhavishya
-              </h1>
+              <h1 className="font-heading text-lg font-bold leading-tight text-charcoal">Bhavishya</h1>
               <p className="text-xs text-muted-foreground">Computer Education</p>
             </div>
           </a>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="#courses" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Programs</a>
-            <a href="#why-us" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Why Us</a>
-            <a href="#faq" className="text-sm font-medium text-foreground hover:text-primary transition-colors">FAQ</a>
-            <a href="#apply" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Contact</a>
+            <a href="/courses" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Programs</a>
+            <a href="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">About Us</a>
+            <a href="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="/faq" className="text-sm font-medium text-foreground hover:text-primary transition-colors">FAQ</a>
+            <a href="/contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Contact</a>
           </div>
 
           {/* CTA buttons */}
@@ -40,8 +40,8 @@ const Navbar = () => {
             <a href="/student-login" className="inline-flex items-center gap-2 border border-border text-foreground text-sm font-medium py-2 px-4 rounded-lg hover:bg-muted transition-colors">
               <User size={16} /> Student Login
             </a>
-            <a href="#apply" className="btn-navy text-sm py-2 px-5">Enquire Now</a>
-            <a href="#apply" className="btn-gold text-sm py-2 px-5">Apply Now</a>
+            <a href="/contact" className="btn-navy text-sm py-2 px-5">Enquire Now</a>
+            <a href="/contact" className="btn-gold text-sm py-2 px-5">Apply Now</a>
           </div>
 
           {/* Mobile toggle */}
@@ -53,12 +53,13 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden bg-card border-t border-border px-4 py-4 space-y-3">
-            <a href="#courses" className="block text-sm font-medium text-foreground">Programs</a>
-            <a href="#why-us" className="block text-sm font-medium text-foreground">Why Us</a>
-            <a href="#faq" className="block text-sm font-medium text-foreground">FAQ</a>
-            <a href="#apply" className="block text-sm font-medium text-foreground">Contact</a>
+            <a href="/courses" className="block text-sm font-medium text-foreground">Programs</a>
+            <a href="/about" className="block text-sm font-medium text-foreground">About Us</a>
+            <a href="/blog" className="block text-sm font-medium text-foreground">Blog</a>
+            <a href="/faq" className="block text-sm font-medium text-foreground">FAQ</a>
+            <a href="/contact" className="block text-sm font-medium text-foreground">Contact</a>
             <a href="/student-login" className="block text-sm font-medium text-foreground">Student Login</a>
-            <a href="#apply" className="btn-gold text-sm py-2 px-5 inline-block">Apply Now</a>
+            <a href="/contact" className="btn-gold text-sm py-2 px-5 inline-block">Apply Now</a>
           </div>
         )}
       </nav>

@@ -1,8 +1,13 @@
 import { ArrowRight, GraduationCap } from "lucide-react";
+import ctaBg from "@/assets/cta-bg-2.jpg";
 
 const CTABanner2 = () => (
-  <section className="py-16 bg-primary">
-    <div className="container mx-auto px-4 text-center space-y-6">
+  <section
+    className="py-16 relative"
+    style={{ backgroundImage: `url(${ctaBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+  >
+    <div className="absolute inset-0 bg-primary/80" />
+    <div className="container mx-auto px-4 text-center space-y-6 relative z-10">
       <GraduationCap size={48} className="mx-auto text-primary-foreground opacity-80" />
       <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground">
         Start Your Journey Today

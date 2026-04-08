@@ -1,17 +1,27 @@
 import { useRef, useState } from "react";
 import { Clock, BookOpen, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import courseDca from "@/assets/course-dca.jpg";
+import courseBca from "@/assets/course-bca.jpg";
+import coursePgdca from "@/assets/course-pgdca.jpg";
+import courseTally from "@/assets/course-tally.jpg";
+import coursePython from "@/assets/course-python.jpg";
+import courseWebdesign from "@/assets/course-webdesign.jpg";
+import courseMsoffice from "@/assets/course-msoffice.jpg";
+import courseBcom from "@/assets/course-bcom.jpg";
+import courseMa from "@/assets/course-ma.jpg";
+import courseBa from "@/assets/course-ba.jpg";
 
 const courses = [
-  { name: "DCA", full: "Diploma in Computer Applications", duration: "1 Year", type: "Diploma", category: "ug", tags: ["trending", "it"] },
-  { name: "BCA", full: "Bachelor of Computer Applications", duration: "3 Years", type: "Degree", category: "ug", tags: ["trending", "it"] },
-  { name: "PGDCA", full: "Post Graduate Diploma in Computer Applications", duration: "1 Year", type: "PG Diploma", category: "pg", tags: ["trending", "it"] },
-  { name: "MA", full: "Master of Arts (Computer Science)", duration: "2 Years", type: "Post Graduate", category: "pg", tags: ["arts"] },
-  { name: "BA", full: "Bachelor of Arts", duration: "3 Years", type: "Degree", category: "ug", tags: ["arts"] },
-  { name: "B.Com", full: "Bachelor of Commerce", duration: "3 Years", type: "Degree", category: "ug", tags: ["commerce"] },
-  { name: "Tally Prime", full: "Tally Prime with GST", duration: "3 Months", type: "Certificate", category: "cert", tags: ["trending", "commerce"] },
-  { name: "MS Office", full: "Microsoft Office Complete", duration: "3 Months", type: "Certificate", category: "cert", tags: ["trending", "it"] },
-  { name: "Web Design", full: "HTML, CSS & JavaScript", duration: "6 Months", type: "Certificate", category: "cert", tags: ["it"] },
-  { name: "Python", full: "Python Programming", duration: "4 Months", type: "Certificate", category: "cert", tags: ["trending", "it"] },
+  { name: "DCA", full: "Diploma in Computer Applications", duration: "1 Year", type: "Diploma", category: "ug", tags: ["trending", "it"], img: courseDca },
+  { name: "BCA", full: "Bachelor of Computer Applications", duration: "3 Years", type: "Degree", category: "ug", tags: ["trending", "it"], img: courseBca },
+  { name: "PGDCA", full: "Post Graduate Diploma in Computer Applications", duration: "1 Year", type: "PG Diploma", category: "pg", tags: ["trending", "it"], img: coursePgdca },
+  { name: "MA", full: "Master of Arts (Computer Science)", duration: "2 Years", type: "Post Graduate", category: "pg", tags: ["arts"], img: courseMa },
+  { name: "BA", full: "Bachelor of Arts", duration: "3 Years", type: "Degree", category: "ug", tags: ["arts"], img: courseBa },
+  { name: "B.Com", full: "Bachelor of Commerce", duration: "3 Years", type: "Degree", category: "ug", tags: ["commerce"], img: courseBcom },
+  { name: "Tally Prime", full: "Tally Prime with GST", duration: "3 Months", type: "Certificate", category: "cert", tags: ["trending", "commerce"], img: courseTally },
+  { name: "MS Office", full: "Microsoft Office Complete", duration: "3 Months", type: "Certificate", category: "cert", tags: ["trending", "it"], img: courseMsoffice },
+  { name: "Web Design", full: "HTML, CSS & JavaScript", duration: "6 Months", type: "Certificate", category: "cert", tags: ["it"], img: courseWebdesign },
+  { name: "Python", full: "Python Programming", duration: "4 Months", type: "Certificate", category: "cert", tags: ["trending", "it"], img: coursePython },
 ];
 
 const categories = [
@@ -19,13 +29,6 @@ const categories = [
   { key: "ug", label: "UG Courses" },
   { key: "pg", label: "PG Courses" },
   { key: "cert", label: "Certificates" },
-];
-
-const gradients = [
-  "from-secondary to-secondary/80",
-  "from-secondary/90 to-accent",
-  "from-accent to-secondary",
-  "from-secondary/80 to-secondary",
 ];
 
 const CourseCarousel = () => {
@@ -44,6 +47,25 @@ const CourseCarousel = () => {
     scrollRef.current?.scrollBy({ left: dir * 300, behavior: "smooth" });
   };
 
+  const CourseCard = ({ course }: { course: typeof courses[0] }) => (
+    <div className="flex-shrink-0 w-[260px] bg-card rounded-xl shadow-md border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <div className="relative h-36 overflow-hidden">
+        <img src={course.img} alt={course.name} className="w-full h-full object-cover" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <span className="absolute bottom-2 left-3 font-heading text-xl font-bold text-white">{course.name}</span>
+        <span className="absolute top-2 right-2 bg-primary/90 text-primary-foreground text-[10px] font-semibold px-2 py-0.5 rounded-full">{course.type}</span>
+      </div>
+      <div className="p-4 space-y-2">
+        <h3 className="font-heading text-sm font-semibold text-foreground leading-snug">{course.full}</h3>
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1"><Clock size={12} /> {course.duration}</span>
+          <span className="flex items-center gap-1"><BookOpen size={12} /> Full-time</span>
+        </div>
+        <a href="#apply" className="btn-navy text-xs py-2 px-4 w-full block text-center mt-2">Explore More</a>
+      </div>
+    </div>
+  );
+
   return (
     <section id="courses" className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -55,7 +77,6 @@ const CourseCarousel = () => {
           </p>
         </div>
 
-        {/* Search */}
         <div className="max-w-md mx-auto mb-8 relative">
           <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -67,7 +88,6 @@ const CourseCarousel = () => {
           />
         </div>
 
-        {/* Category tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map((cat) => (
             <button
@@ -84,28 +104,14 @@ const CourseCarousel = () => {
           ))}
         </div>
 
-        {/* Slider view */}
         {!showAll && (
           <div className="relative">
             <button onClick={() => scroll(-1)} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
               <ChevronLeft size={20} className="text-foreground" />
             </button>
             <div ref={scrollRef} className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2">
-              {filtered.map((course, i) => (
-                <div key={course.name} className="flex-shrink-0 w-[260px] bg-card rounded-xl shadow-md border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                  <div className={`bg-gradient-to-br ${gradients[i % gradients.length]} h-24 flex items-center justify-center`}>
-                    <span className="font-heading text-2xl font-bold text-primary">{course.name}</span>
-                  </div>
-                  <div className="p-4 space-y-2">
-                    <span className="bg-primary/20 text-foreground text-xs font-semibold px-3 py-1 rounded-full">{course.type}</span>
-                    <h3 className="font-heading text-sm font-semibold text-foreground leading-snug">{course.full}</h3>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1"><Clock size={12} /> {course.duration}</span>
-                      <span className="flex items-center gap-1"><BookOpen size={12} /> Full-time</span>
-                    </div>
-                    <a href="#apply" className="btn-navy text-xs py-2 px-4 w-full block text-center mt-2">Explore More</a>
-                  </div>
-                </div>
+              {filtered.map((course) => (
+                <CourseCard key={course.name} course={course} />
               ))}
             </div>
             <button onClick={() => scroll(1)} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
@@ -114,16 +120,17 @@ const CourseCarousel = () => {
           </div>
         )}
 
-        {/* Grid view (all courses) */}
         {showAll && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filtered.map((course, i) => (
+            {filtered.map((course) => (
               <div key={course.name} className="bg-card rounded-xl shadow-md border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <div className={`bg-gradient-to-br ${gradients[i % gradients.length]} h-24 flex items-center justify-center`}>
-                  <span className="font-heading text-2xl font-bold text-primary">{course.name}</span>
+                <div className="relative h-36 overflow-hidden">
+                  <img src={course.img} alt={course.name} className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <span className="absolute bottom-2 left-3 font-heading text-xl font-bold text-white">{course.name}</span>
+                  <span className="absolute top-2 right-2 bg-primary/90 text-primary-foreground text-[10px] font-semibold px-2 py-0.5 rounded-full">{course.type}</span>
                 </div>
                 <div className="p-4 space-y-2">
-                  <span className="bg-primary/20 text-foreground text-xs font-semibold px-3 py-1 rounded-full">{course.type}</span>
                   <h3 className="font-heading text-sm font-semibold text-foreground leading-snug">{course.full}</h3>
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1"><Clock size={12} /> {course.duration}</span>
@@ -140,7 +147,6 @@ const CourseCarousel = () => {
           <p className="text-center text-muted-foreground py-12">No courses found. Try a different search or category.</p>
         )}
 
-        {/* View All button */}
         <div className="text-center mt-8">
           <button
             onClick={() => { setShowAll(!showAll); setActiveCategory("all"); }}

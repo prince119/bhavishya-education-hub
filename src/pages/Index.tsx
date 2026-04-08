@@ -5,6 +5,8 @@ import AffiliatedPartners from "@/components/AffiliatedPartners";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CTABanner from "@/components/CTABanner";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import CTABanner2 from "@/components/CTABanner2";
+import BlogSection from "@/components/BlogSection";
 import FAQSection from "@/components/FAQSection";
 import ApplyForm from "@/components/ApplyForm";
 import Footer from "@/components/Footer";
@@ -19,6 +21,8 @@ const Index = () => {
       <WhyChooseUs />
       <CTABanner />
       <TestimonialsSection />
+      <CTABanner2 />
+      <BlogSection />
       <FAQSection />
       <ApplyForm />
       <Footer />

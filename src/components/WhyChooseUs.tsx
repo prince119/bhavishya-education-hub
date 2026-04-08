@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { Monitor, Users, Award, Briefcase, BookOpen, Headphones, ChevronLeft, ChevronRight } from "lucide-react";
+import whyBg from "@/assets/why-choose-bg.jpg";
 
 const features = [
   { icon: Monitor, title: "Modern Computer Labs", desc: "Fully equipped labs with latest hardware and software for hands-on learning." },
@@ -34,12 +35,19 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section id="why-us" className="py-16 bg-muted">
-      <div className="container mx-auto px-4">
+    <section
+      id="why-us"
+      className="py-16 relative"
+      style={{ backgroundImage: `url(${whyBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-secondary/85" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center space-y-3 mb-12">
           <span className="text-sm font-semibold text-primary uppercase tracking-wider">Why Bhavishya?</span>
-          <h2 className="section-heading">Why Choose Bhavishya Education</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">What makes us the preferred choice for 5000+ students across the region.</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-secondary-foreground">Why Choose Bhavishya Education</h2>
+          <p className="text-secondary-foreground/70 max-w-2xl mx-auto">What makes us the preferred choice for 5000+ students across the region.</p>
         </div>
 
         <div className="relative">
@@ -54,7 +62,7 @@ const WhyChooseUs = () => {
             className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2"
           >
             {features.map((f, i) => (
-              <div key={i} className="flex-shrink-0 w-[300px] bg-card rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border group">
+              <div key={i} className="flex-shrink-0 w-[300px] bg-card/95 backdrop-blur-sm rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border group">
                 <div className="w-12 h-12 rounded-lg bg-primary/15 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
                   <f.icon size={24} className="text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>

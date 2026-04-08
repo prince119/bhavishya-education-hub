@@ -1,89 +1,93 @@
-## Plan: Hero Image + Course Images + Blog Section + Why Choose Us Background + CTA Banner
+## Plan: Hero Cleanup, CTA Images, Blog Style, FAQ Categories, Dedicated Pages, WhatsApp/Call Buttons
 
-### Summary
-
-Add images to hero and course cards using AI-generated relevant educational images. Restructure hero to place course cards below CTA buttons (3-card scrolling strip like the Amity reference). Add a background image/pattern to "Why Choose Us". Create a new scrollable blog section with modern cards. Add another CTA banner.
+This is a large set of changes spanning the hero section, CTA banners, blog section, FAQ, form section, dedicated pages, and floating action buttons.
 
 ---
 
-### 1. Generate Educational Images
-
-Use the Lovable AI image gateway to generate:
-
-- **Hero image**: A professional student/education visual (student at computer, campus feel)
-- **Course card images**: 10 unique images for each course (DCA, BCA, PGDCA, MA, BA, B.Com, Tally, MS Office, Web Design, Python) — small, relevant thumbnails showing the subject matter
-- **Why Choose Us background**: A subtle educational pattern/campus background
-- **Blog post thumbnails**: 6 blog card images
-
-All images saved to `src/assets/` and imported in components.
-
----
-
-### 2. Redesign Hero Section
+### 1. Hero Section Updates
 
 **File:** `src/components/HeroSection.tsx`
 
-- Update headline to be more future/learning-oriented: "Shape Your Future with **bhavishya education**"
-- Right side: Replace GraduationCap icon with a generated student/education image
-- Move the scrolling course strip directly below the "Apply Now" and "Explore Courses" buttons (not at the bottom of the section)
-- Course strip shows 3 cards at a time with images, auto-scrolling like the Amity reference
-- Mobile responsive: stack layout, strip shows 1-2 cards
+- Remove "ISO Certified Since 2010" badge (top-right of image) and "5000+ Students Placed" badge (bottom-left of image)
+- Change stat from "5000+" to "1500+ Students Trained"
+- Change hero title to something like "Empowering Future-Ready Digital Leaders" or "Build Your Career with Future-Ready Skills"
+- White background instead of gradient (`bg-white` or `bg-background`) & colour of content accordingly so it'll be visible
+- Generate a single confident student image (like Amity reference — professional, confident pose) to replace current group photo
+- Show the student image on mobile too (remove `hidden md:flex`, make it responsive — smaller on mobile, stacked layout)
+- Link all scrolling course cards to `#apply` form
 
 ---
 
-### 3. Add Images to Course Cards
+### 2. CTA Banners with Images
 
-**File:** `src/components/CourseCarousel.tsx`
+**Files:** `src/components/CTABanner.tsx`, `src/components/CTABanner2.tsx`
 
-- Replace the gradient header area in each course card with an actual image (generated per-course)
-- Course name overlaid on the image or shown below
-- Keep the existing slider + grid + search + category functionality
-
----
-
-### 4. Add Background to "Why Choose Us"
-
-**File:** `src/components/WhyChooseUs.tsx`
-
-- Add a subtle educational background image or pattern behind the section
-- Use a dark overlay so text remains readable
-- Cards stay as-is with slight opacity adjustments for contrast
+- Add a generated background image to both CTA sections (education/campus themed)
+- Use dark overlay for text readability
+- Keep existing text and buttons
 
 ---
 
-### 5. Add Second CTA Banner
+### 3. Blog Section Styling
 
-**File:** `src/components/CTABanner2.tsx` (new)
+**File:** `src/components/BlogSection.tsx`
 
-- Different messaging: "Start Your Journey Today — Admissions Open for 2026"
-- Place between Testimonials and FAQ sections
-- Different visual style from existing CTA (e.g., gold background with navy text, or image-backed)
-
----
-
-### 6. Create Scrollable Blog Section
-
-**File:** `src/components/BlogSection.tsx` (new)
-
-- Modern card design: image thumbnail, category tag, title, excerpt, date, "Read More" link
-- Horizontal scrollable slider with arrow navigation (same pattern as other sliders)
-- 6 sample blog posts about computer education, career tips, course updates
-- Section heading: "Latest from Our Blog"
+- Add a light pastel background color (e.g., `bg-blue-50` or light cream)
+- Change the "Our Students Shine at Campus Placements" blog card image — generate a new one showing students at a placement event/celebration
+- Section title: "Latest News & Blogs"
 
 ---
 
-### 7. Update Page Layout
+### 4. Apply Form Background
 
-**File:** `src/pages/Index.tsx`
+**File:** `src/components/ApplyForm.tsx`
 
-Add BlogSection and CTABanner2:
-Hero → Courses → Affiliates → Why Choose Us → CTA Banner → Testimonials → **CTA Banner 2** → **Blog Section** → FAQ → Apply → Footer
+- Generate a modern educational background image for the form section
+- Apply with dark overlay so form remains readable
+
+---
+
+### 5. FAQ with Categories
+
+**File:** `src/components/FAQSection.tsx`
+
+- Add category filter tabs similar to courses section: "All", "Admissions", "Courses", "Placements", "General"
+- Tag each FAQ with a category and filter with `useState`
+
+---
+
+### 6. Dedicated Pages + Routing
+
+**New files + `src/App.tsx`:**
+
+Create dedicated pages with Navbar and Footer:
+
+- `/courses` — `src/pages/CoursesPage.tsx` (full course grid with search/filter, reuses CourseCarousel logic)
+- `/about` — `src/pages/AboutPage.tsx` (about the institute, why choose us, affiliated partners)
+- `/blog` — `src/pages/BlogPage.tsx` (all blog posts in grid)
+- `/contact` — `src/pages/ContactPage.tsx` (apply form + map placeholder + contact info)
+- `/faq` — `src/pages/FAQPage.tsx` (full FAQ with categories)
+
+Update Navbar links to point to these pages. Update Footer links too. Add all routes in `App.tsx`.
+
+---
+
+### 7. Floating WhatsApp & Call Buttons
+
+**New file:** `src/components/FloatingButtons.tsx`
+
+- Fixed position on the right side, vertically centered (`fixed right-4 top-1/2 -translate-y-1/2`)
+- Two circular buttons stacked: WhatsApp (green) and Phone Call (blue)
+- WhatsApp links to `https://wa.me/91XXXXXXXXXX`
+- Call links to `tel:+91XXXXXXXXXX`
+- Add to `Index.tsx` layout (and all pages via a shared layout or directly)
 
 ---
 
 ### Technical Notes
 
-- Images generated via AI gateway, saved as base64 PNGs in `src/assets/generated/`
-- Hero course strip uses CSS `animate-scroll-left` with 3 visible cards
-- Blog slider uses same `useRef` + `scrollBy` pattern as other sliders
-- Background image on Why Choose Us uses `bg-cover bg-center` with a dark overlay div
+- ~7 new images generated via AI gateway (hero student, 2 CTA backgrounds, 1 blog replacement, 1 form background)
+- FAQ categories use same `useState` pattern as courses
+- Dedicated pages reuse existing section components where possible
+- Floating buttons use Lucide `Phone` and a WhatsApp SVG icon
+- All course cards in hero strip get `<a href="#apply">` wrapper

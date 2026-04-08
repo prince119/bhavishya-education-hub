@@ -26,31 +26,42 @@ const heroCards = [
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-background">
-      <div className="container mx-auto px-4 py-14 md:py-20">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50/60 via-background to-amber-50/40">
+      {/* Decorative square boxes */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-10 left-8 w-16 h-16 border-2 border-primary/15 rounded-lg rotate-12" />
+        <div className="absolute top-32 right-12 w-10 h-10 border-2 border-secondary/10 rounded-md -rotate-6" />
+        <div className="absolute bottom-20 left-16 w-12 h-12 border-2 border-primary/10 rounded-lg rotate-45" />
+        <div className="absolute top-1/2 right-1/4 w-20 h-20 border-2 border-blue-200/20 rounded-xl rotate-12" />
+        <div className="absolute bottom-32 right-8 w-14 h-14 border-2 border-amber-200/20 rounded-lg -rotate-12" />
+        <div className="absolute top-20 left-1/3 w-8 h-8 bg-primary/5 rounded-md rotate-45" />
+        <div className="absolute bottom-10 left-1/2 w-10 h-10 bg-secondary/5 rounded-md -rotate-12" />
+      </div>
+
+      <div className="container mx-auto px-4 py-10 md:py-20 relative z-10">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-center">
           {/* Left content */}
-          <div className="space-y-6">
+          <div className="space-y-5 md:space-y-6 order-2 md:order-1">
             <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 border border-primary/30">
               <Award size={16} className="text-primary" />
               <span className="text-sm font-medium text-primary">Admissions Open for July 2026</span>
             </div>
 
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Build Your Career with{" "}
               <span className="bg-primary text-primary-foreground px-3 py-1 inline-block transform -rotate-1">
                 Future-Ready Skills
               </span>
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-lg">
+            <p className="text-base md:text-lg text-muted-foreground max-w-lg">
               Join <strong className="text-primary">1500+</strong> successful students who built
               future-ready digital skills through our industry-recognized programs at Bhavishya Education.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <a href="#apply" className="btn-gold text-base">Apply Now</a>
-              <a href="#courses" className="border-2 border-secondary text-secondary font-semibold px-6 py-3 rounded-lg hover:bg-secondary hover:text-secondary-foreground transition-all duration-300">
+            <div className="flex flex-wrap gap-3 md:gap-4">
+              <a href="#apply" className="btn-gold text-sm md:text-base">Apply Now</a>
+              <a href="#courses" className="border-2 border-secondary text-secondary font-semibold px-5 md:px-6 py-2.5 md:py-3 rounded-lg hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 text-sm md:text-base">
                 Explore Courses
               </a>
             </div>
@@ -59,11 +70,11 @@ const HeroSection = () => {
             <div className="overflow-hidden rounded-xl pt-2">
               <div className="flex animate-scroll-left gap-3 w-max">
                 {[...heroCards, ...heroCards].map((card, i) => (
-                  <a href="#apply" key={i} className="flex-shrink-0 w-36 rounded-xl overflow-hidden border border-border bg-card shadow-md hover:shadow-lg transition-shadow">
-                    <img src={card.img} alt={card.name} className="w-full h-20 object-cover" />
-                    <div className="p-2">
-                      <p className="font-heading text-sm font-bold text-foreground">{card.name}</p>
-                      <p className="text-[10px] text-muted-foreground">{card.specs}</p>
+                  <a href="#apply" key={i} className="flex-shrink-0 w-28 sm:w-36 rounded-xl overflow-hidden border border-border bg-card shadow-md hover:shadow-lg transition-shadow">
+                    <img src={card.img} alt={card.name} className="w-full h-16 sm:h-20 object-cover" />
+                    <div className="p-1.5 sm:p-2">
+                      <p className="font-heading text-xs sm:text-sm font-bold text-foreground">{card.name}</p>
+                      <p className="text-[9px] sm:text-[10px] text-muted-foreground">{card.specs}</p>
                     </div>
                   </a>
                 ))}
@@ -71,22 +82,22 @@ const HeroSection = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex gap-8 pt-2">
+            <div className="flex gap-6 md:gap-8 pt-2">
               {[
                 { val: "1500+", label: "Students Trained" },
                 { val: "15+", label: "Courses Offered" },
                 { val: "95%", label: "Placement Rate" },
               ].map((s) => (
                 <div key={s.label} className="text-center">
-                  <p className="text-2xl font-bold text-primary">{s.val}</p>
-                  <p className="text-xs text-muted-foreground">{s.label}</p>
+                  <p className="text-xl md:text-2xl font-bold text-primary">{s.val}</p>
+                  <p className="text-[10px] md:text-xs text-muted-foreground">{s.label}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right - hero image (visible on all screens) */}
-          <div className="flex justify-center order-first md:order-last">
+          {/* Right - hero image (visible on ALL screens) */}
+          <div className="flex justify-center order-1 md:order-2">
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20">
                 <img
@@ -94,7 +105,7 @@ const HeroSection = () => {
                   alt="Confident student at Bhavishya Computer Education"
                   width={800}
                   height={1024}
-                  className="w-full max-w-xs md:max-w-lg object-cover"
+                  className="w-full max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-lg object-cover"
                 />
               </div>
             </div>

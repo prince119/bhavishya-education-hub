@@ -1,70 +1,89 @@
-
-
-## Plan: Redesign Sections as Sliders + Hero Revamp
+## Plan: Hero Image + Course Images + Blog Section + Why Choose Us Background + CTA Banner
 
 ### Summary
-Convert courses, testimonials, and "Why Choose Us" into horizontal sliders to reduce vertical space. Redesign the hero section to match the Amity-style layout with a student image area and scrolling course image strip. Add a "View All Courses" button.
+
+Add images to hero and course cards using AI-generated relevant educational images. Restructure hero to place course cards below CTA buttons (3-card scrolling strip like the Amity reference). Add a background image/pattern to "Why Choose Us". Create a new scrollable blog section with modern cards. Add another CTA banner.
 
 ---
 
-### 1. Redesign Hero Section (Amity-style)
+### 1. Generate Educational Images
 
-Rebuild `HeroSection.tsx` to match the reference:
-- Left side: headline with highlighted text block (gold), subtitle with bold stats, CTA buttons
-- Right side: decorative area with gradient/illustration placeholder (since we don't have a student photo)
-- Bottom strip: horizontal auto-scrolling course cards (like the BCA/BBA cards in the reference) — small image-like cards with course name and specialization count, scrolling infinitely
-- Add decorative gold diamond/plus shapes like the reference
+Use the Lovable AI image gateway to generate:
+
+- **Hero image**: A professional student/education visual (student at computer, campus feel)
+- **Course card images**: 10 unique images for each course (DCA, BCA, PGDCA, MA, BA, B.Com, Tally, MS Office, Web Design, Python) — small, relevant thumbnails showing the subject matter
+- **Why Choose Us background**: A subtle educational pattern/campus background
+- **Blog post thumbnails**: 6 blog card images
+
+All images saved to `src/assets/` and imported in components.
+
+---
+
+### 2. Redesign Hero Section
 
 **File:** `src/components/HeroSection.tsx`
 
+- Update headline to be more future/learning-oriented: "Shape Your Future with **bhavishya education**"
+- Right side: Replace GraduationCap icon with a generated student/education image
+- Move the scrolling course strip directly below the "Apply Now" and "Explore Courses" buttons (not at the bottom of the section)
+- Course strip shows 3 cards at a time with images, auto-scrolling like the Amity reference
+- Mobile responsive: stack layout, strip shows 1-2 cards
+
 ---
 
-### 2. Convert Courses Section to Horizontal Slider
-
-Replace the full grid with a horizontally scrollable slider:
-- Keep search bar and category tabs at top
-- Show 4 cards visible at a time (desktop), with left/right arrow buttons to scroll
-- Add "View All Courses" button at bottom that scrolls to show all courses (or links to `#courses` with all filters cleared)
-- Reduce section vertical footprint significantly
+### 3. Add Images to Course Cards
 
 **File:** `src/components/CourseCarousel.tsx`
 
+- Replace the gradient header area in each course card with an actual image (generated per-course)
+- Course name overlaid on the image or shown below
+- Keep the existing slider + grid + search + category functionality
+
 ---
 
-### 3. Convert "Why Choose Us" to Slider
-
-Replace the 6-card grid with a horizontal slider/carousel:
-- Show 3 cards at a time on desktop, 1 on mobile
-- Left/right navigation arrows
-- Auto-slide with pause on hover
-- Rename/keep as "Why Choose Bhavishya Education"
+### 4. Add Background to "Why Choose Us"
 
 **File:** `src/components/WhyChooseUs.tsx`
 
----
-
-### 4. Convert Testimonials to Slider
-
-Replace the 6-card grid with a horizontal slider:
-- Show 3 cards at a time on desktop, 1 on mobile
-- Navigation arrows and/or dot indicators
-- Smooth scroll behavior
-
-**File:** `src/components/TestimonialsSection.tsx`
+- Add a subtle educational background image or pattern behind the section
+- Use a dark overlay so text remains readable
+- Cards stay as-is with slight opacity adjustments for contrast
 
 ---
 
-### 5. Add Scrolling Animation CSS
+### 5. Add Second CTA Banner
 
-Add a reusable CSS-based scroll utility or use `useRef` + scroll logic for the arrow-based sliders. The hero course strip will use the existing `animate-scroll-left` keyframe.
+**File:** `src/components/CTABanner2.tsx` (new)
 
-**File:** `src/index.css` (minor additions if needed)
+- Different messaging: "Start Your Journey Today — Admissions Open for 2026"
+- Place between Testimonials and FAQ sections
+- Different visual style from existing CTA (e.g., gold background with navy text, or image-backed)
 
 ---
 
-### Technical Approach
-- Sliders use `useRef` + `scrollBy` with `scroll-smooth` for arrow navigation
-- Hero bottom strip uses CSS animation (infinite marquee) like the existing affiliated partners section
-- All sliders are responsive: fewer visible cards on mobile
-- No external carousel library — native scroll with buttons
+### 6. Create Scrollable Blog Section
 
+**File:** `src/components/BlogSection.tsx` (new)
+
+- Modern card design: image thumbnail, category tag, title, excerpt, date, "Read More" link
+- Horizontal scrollable slider with arrow navigation (same pattern as other sliders)
+- 6 sample blog posts about computer education, career tips, course updates
+- Section heading: "Latest from Our Blog"
+
+---
+
+### 7. Update Page Layout
+
+**File:** `src/pages/Index.tsx`
+
+Add BlogSection and CTABanner2:
+Hero → Courses → Affiliates → Why Choose Us → CTA Banner → Testimonials → **CTA Banner 2** → **Blog Section** → FAQ → Apply → Footer
+
+---
+
+### Technical Notes
+
+- Images generated via AI gateway, saved as base64 PNGs in `src/assets/generated/`
+- Hero course strip uses CSS `animate-scroll-left` with 3 visible cards
+- Blog slider uses same `useRef` + `scrollBy` pattern as other sliders
+- Background image on Why Choose Us uses `bg-cover bg-center` with a dark overlay div

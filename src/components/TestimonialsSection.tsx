@@ -1,4 +1,5 @@
-import { Star } from "lucide-react";
+import { useRef } from "react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   { name: "Rahul Sharma", course: "BCA", batch: "2024", rating: 5, text: "Bhavishya Computer Education completely transformed my career. The faculty is excellent and the practical training helped me land my first IT job within 3 months of graduating." },
@@ -9,38 +10,56 @@ const testimonials = [
   { name: "Anita Singh", course: "B.Com", batch: "2024", rating: 4, text: "Affordable fees and quality education. The staff is very supportive and the placement assistance really helped me find the right opportunity." },
 ];
 
-const TestimonialsSection = () => (
-  <section className="py-16 bg-background">
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-12 space-y-3">
-        <span className="text-sm font-semibold text-primary uppercase tracking-wider">Student Reviews</span>
-        <h2 className="section-heading">What Our Students Say</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">Real stories from real students who built their careers with us.</p>
-      </div>
+const TestimonialsSection = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.map((t, i) => (
-          <div key={i} className="bg-card rounded-xl border border-border p-6 shadow-sm hover:shadow-lg transition-shadow space-y-4">
-            <div className="flex gap-1">
-              {Array.from({ length: 5 }).map((_, s) => (
-                <Star key={s} size={16} className={s < t.rating ? "fill-primary text-primary" : "text-border"} />
-              ))}
-            </div>
-            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">"{t.text}"</p>
-            <div className="flex items-center gap-3 pt-2 border-t border-border">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground font-bold text-sm">
-                {t.name.split(" ").map(n => n[0]).join("")}
+  const scroll = (dir: number) => {
+    scrollRef.current?.scrollBy({ left: dir * 340, behavior: "smooth" });
+  };
+
+  return (
+    <section className="py-16 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12 space-y-3">
+          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Student Reviews</span>
+          <h2 className="section-heading">What Our Students Say</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">Real stories from real students who built their careers with us.</p>
+        </div>
+
+        <div className="relative">
+          <button onClick={() => scroll(-1)} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
+            <ChevronLeft size={20} className="text-foreground" />
+          </button>
+
+          <div ref={scrollRef} className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2">
+            {testimonials.map((t, i) => (
+              <div key={i} className="flex-shrink-0 w-[320px] bg-card rounded-xl border border-border p-6 shadow-sm hover:shadow-lg transition-shadow space-y-4">
+                <div className="flex gap-1">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Star key={s} size={16} className={s < t.rating ? "fill-primary text-primary" : "text-border"} />
+                  ))}
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">"{t.text}"</p>
+                <div className="flex items-center gap-3 pt-2 border-t border-border">
+                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground font-bold text-sm">
+                    {t.name.split(" ").map(n => n[0]).join("")}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">{t.name}</p>
+                    <p className="text-xs text-muted-foreground">{t.course} · Batch {t.batch}</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-sm text-foreground">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.course} · Batch {t.batch}</p>
-              </div>
-            </div>
+            ))}
           </div>
-        ))}
+
+          <button onClick={() => scroll(1)} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
+            <ChevronRight size={20} className="text-foreground" />
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default TestimonialsSection;

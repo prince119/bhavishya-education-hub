@@ -1,83 +1,70 @@
 
 
-## Plan: Enhance Bhavishya Computer Education Website
+## Plan: Redesign Sections as Sliders + Hero Revamp
 
-Based on the Amity Online reference screenshots, here are the additions and changes:
-
----
-
-### 1. Add "Existing Student Login" button to Navbar
-
-Add a third CTA button in the navbar (desktop and mobile) with a person icon and "Student Login" label, styled as an outlined button similar to the Amity reference. This links to a simple login page.
-
-**Files:** `src/components/Navbar.tsx`
+### Summary
+Convert courses, testimonials, and "Why Choose Us" into horizontal sliders to reduce vertical space. Redesign the hero section to match the Amity-style layout with a student image area and scrolling course image strip. Add a "View All Courses" button.
 
 ---
 
-### 2. Create Student Login Page
+### 1. Redesign Hero Section (Amity-style)
 
-A simple `/student-login` page with email/password fields and a login button. For now, this will be a static UI (no backend auth). Add the route in `App.tsx`.
+Rebuild `HeroSection.tsx` to match the reference:
+- Left side: headline with highlighted text block (gold), subtitle with bold stats, CTA buttons
+- Right side: decorative area with gradient/illustration placeholder (since we don't have a student photo)
+- Bottom strip: horizontal auto-scrolling course cards (like the BCA/BBA cards in the reference) — small image-like cards with course name and specialization count, scrolling infinitely
+- Add decorative gold diamond/plus shapes like the reference
 
-**Files:** `src/pages/StudentLogin.tsx`, `src/App.tsx`
-
----
-
-### 3. Redesign Course Section with Categories and Search
-
-Replace the auto-scrolling carousel with an Amity-style course explorer:
-- Section heading "Explore Our Programs"
-- Category filter tabs: All Courses, PG Courses, UG Courses, Certificates
-- Sub-category pills: Trending, IT Courses, Arts & Humanities, Commerce
-- Search bar with search icon
-- Grid of course cards (4 per row on desktop) with gradient header, course name, duration, type, and "Explore More" CTA
-
-**Files:** `src/components/CourseCarousel.tsx` (rewrite)
+**File:** `src/components/HeroSection.tsx`
 
 ---
 
-### 4. Add Affiliated Universities / Partners Logo Section
+### 2. Convert Courses Section to Horizontal Slider
 
-A new section showing affiliated university logos in a horizontal scrolling strip, with heading "Trusted & Affiliated With Leading Universities". Will use placeholder text-based logos since we don't have actual images.
+Replace the full grid with a horizontally scrollable slider:
+- Keep search bar and category tabs at top
+- Show 4 cards visible at a time (desktop), with left/right arrow buttons to scroll
+- Add "View All Courses" button at bottom that scrolls to show all courses (or links to `#courses` with all filters cleared)
+- Reduce section vertical footprint significantly
 
-**Files:** `src/components/AffiliatedPartners.tsx` (new)
-
----
-
-### 5. Add CTA Banner Section
-
-A full-width navy/gold banner section similar to the Amity reference: "Are You Ready To Take The Next Step In Your Career?" with an "Apply Now" button. Placed between WhyChooseUs and FAQ.
-
-**Files:** `src/components/CTABanner.tsx` (new)
+**File:** `src/components/CourseCarousel.tsx`
 
 ---
 
-### 6. Add Student Reviews / Testimonials Section
+### 3. Convert "Why Choose Us" to Slider
 
-A carousel/grid of student testimonial cards similar to the Amity reference:
-- Student avatar (placeholder initials), name, course, batch year
-- Star rating
-- Review text
-- "Read More" button
-- "See All Success Stories" CTA at bottom
+Replace the 6-card grid with a horizontal slider/carousel:
+- Show 3 cards at a time on desktop, 1 on mobile
+- Left/right navigation arrows
+- Auto-slide with pause on hover
+- Rename/keep as "Why Choose Bhavishya Education"
 
-**Files:** `src/components/TestimonialsSection.tsx` (new)
-
----
-
-### 7. Update Page Layout
-
-Add the new sections to `Index.tsx` in order:
-Navbar > Hero > Courses (redesigned) > Affiliated Partners > WhyChooseUs > CTA Banner > Testimonials > FAQ > Apply Form > Footer
-
-**Files:** `src/pages/Index.tsx`
+**File:** `src/components/WhyChooseUs.tsx`
 
 ---
 
-### Technical Notes
+### 4. Convert Testimonials to Slider
 
-- All new components use existing Tailwind config, color tokens (primary/gold, secondary/navy, charcoal), and font families
-- Category filtering uses React `useState` for tab selection
-- Search filters courses by name client-side
-- Student login page is a static form placeholder (can be connected to Supabase later)
-- Testimonials use hardcoded sample data with Indian student names relevant to the coaching center context
+Replace the 6-card grid with a horizontal slider:
+- Show 3 cards at a time on desktop, 1 on mobile
+- Navigation arrows and/or dot indicators
+- Smooth scroll behavior
+
+**File:** `src/components/TestimonialsSection.tsx`
+
+---
+
+### 5. Add Scrolling Animation CSS
+
+Add a reusable CSS-based scroll utility or use `useRef` + scroll logic for the arrow-based sliders. The hero course strip will use the existing `animate-scroll-left` keyframe.
+
+**File:** `src/index.css` (minor additions if needed)
+
+---
+
+### Technical Approach
+- Sliders use `useRef` + `scrollBy` with `scroll-smooth` for arrow navigation
+- Hero bottom strip uses CSS animation (infinite marquee) like the existing affiliated partners section
+- All sliders are responsive: fewer visible cards on mobile
+- No external carousel library — native scroll with buttons
 

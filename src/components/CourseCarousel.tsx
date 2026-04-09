@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Clock, BookOpen, Search, ChevronLeft, ChevronRight } from "lucide-react";
 import courseDca from "@/assets/course-dca.jpg";
 import courseBca from "@/assets/course-bca.jpg";
@@ -31,11 +31,25 @@ const categories = [
   { key: "cert", label: "Certificates" },
 ];
 
-const CourseCarousel = () => {
+const searchPlaceholders = ["Search DCA...", "Search BCA...", "Search Tally Prime...", "Search Python...", "Search Web Design...", "Search MS Office..."];
+
+interface CourseCarouselProps {
+  showAll?: boolean;
+}
+
+const CourseCarousel = ({ showAll: forceShowAll = false }: CourseCarouselProps) => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [search, setSearch] = useState("");
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(forceShowAll);
+  const [placeholderIdx, setPlaceholderIdx] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlaceholderIdx((prev) => (prev + 1) % searchPlaceholders.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   const filtered = courses.filter((c) => {
     if (activeCategory !== "all" && c.category !== activeCategory) return false;
@@ -48,7 +62,7 @@ const CourseCarousel = () => {
   };
 
   const CourseCard = ({ course }: { course: typeof courses[0] }) => (
-    <div className="flex-shrink-0 w-[260px] bg-card rounded-xl shadow-md border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className={`${forceShowAll ? "" : "flex-shrink-0 w-[260px]"} bg-card rounded-xl shadow-md border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300`}>
       <div className="relative h-36 overflow-hidden">
         <img src={course.img} alt={course.name} className="w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -81,10 +95,10 @@ const CourseCarousel = () => {
           <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search courses..."
+            placeholder={searchPlaceholders[placeholderIdx]}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+            className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
           />
         </div>
 
@@ -92,7 +106,7 @@ const CourseCarousel = () => {
           {categories.map((cat) => (
             <button
               key={cat.key}
-              onClick={() => { setActiveCategory(cat.key); setShowAll(false); }}
+              onClick={() => { setActiveCategory(cat.key); if (!forceShowAll) setShowAll(false); }}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === cat.key
                   ? "bg-secondary text-secondary-foreground shadow"
@@ -104,7 +118,7 @@ const CourseCarousel = () => {
           ))}
         </div>
 
-        {!showAll && (
+        {!showAll && !forceShowAll && (
           <div className="relative">
             <button onClick={() => scroll(-1)} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
               <ChevronLeft size={20} className="text-foreground" />
@@ -120,25 +134,10 @@ const CourseCarousel = () => {
           </div>
         )}
 
-        {showAll && (
+        {(showAll || forceShowAll) && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filtered.map((course) => (
-              <div key={course.name} className="bg-card rounded-xl shadow-md border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <div className="relative h-36 overflow-hidden">
-                  <img src={course.img} alt={course.name} className="w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <span className="absolute bottom-2 left-3 font-heading text-xl font-bold text-white">{course.name}</span>
-                  <span className="absolute top-2 right-2 bg-primary/90 text-primary-foreground text-[10px] font-semibold px-2 py-0.5 rounded-full">{course.type}</span>
-                </div>
-                <div className="p-4 space-y-2">
-                  <h3 className="font-heading text-sm font-semibold text-foreground leading-snug">{course.full}</h3>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><Clock size={12} /> {course.duration}</span>
-                    <span className="flex items-center gap-1"><BookOpen size={12} /> Full-time</span>
-                  </div>
-                  <a href="#apply" className="btn-navy text-xs py-2 px-4 w-full block text-center mt-2">Explore More</a>
-                </div>
-              </div>
+              <CourseCard key={course.name} course={course} />
             ))}
           </div>
         )}
@@ -147,14 +146,16 @@ const CourseCarousel = () => {
           <p className="text-center text-muted-foreground py-12">No courses found. Try a different search or category.</p>
         )}
 
-        <div className="text-center mt-8">
-          <button
-            onClick={() => { setShowAll(!showAll); setActiveCategory("all"); }}
-            className="btn-gold text-sm"
-          >
-            {showAll ? "Show Less" : "View All Courses"}
-          </button>
-        </div>
+        {!forceShowAll && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => { setShowAll(!showAll); setActiveCategory("all"); }}
+              className="btn-gold text-sm"
+            >
+              {showAll ? "Show Less" : "View All Courses"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

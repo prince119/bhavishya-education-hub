@@ -133,7 +133,7 @@
   100% { transform: translateX(-50%); }
 }
 .animate-scroll-left {
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 45s linear infinite;
 }
 .animate-scroll-left:hover {
   animation-play-state: paused;

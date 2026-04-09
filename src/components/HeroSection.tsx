@@ -38,16 +38,16 @@ const HeroSection = () => {
         <div className="absolute bottom-10 left-1/2 w-10 h-10 bg-secondary/5 rounded-md -rotate-12" />
       </div>
 
-      <div className="container mx-auto px-4 py-10 md:py-20 relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-center">
+      <div className="container mx-auto px-4 py-8 md:py-20 relative z-10">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
           {/* Left content */}
-          <div className="space-y-5 md:space-y-6 order-2 md:order-1">
+          <div className="space-y-4 md:space-y-6 order-2 md:order-1">
             <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 border border-primary/30">
               <Award size={16} className="text-primary" />
               <span className="text-sm font-medium text-primary">Admissions Open for July 2026</span>
             </div>
 
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Build Your Career with{" "}
               <span className="bg-primary text-primary-foreground px-3 py-1 inline-block transform -rotate-1">
                 Future-Ready Skills
@@ -70,11 +70,11 @@ const HeroSection = () => {
             <div className="overflow-hidden rounded-xl pt-2">
               <div className="flex animate-scroll-left gap-3 w-max">
                 {[...heroCards, ...heroCards].map((card, i) => (
-                  <a href="#apply" key={i} className="flex-shrink-0 w-28 sm:w-36 rounded-xl overflow-hidden border border-border bg-card shadow-md hover:shadow-lg transition-shadow">
-                    <img src={card.img} alt={card.name} className="w-full h-16 sm:h-20 object-cover" />
-                    <div className="p-1.5 sm:p-2">
-                      <p className="font-heading text-xs sm:text-sm font-bold text-foreground">{card.name}</p>
-                      <p className="text-[9px] sm:text-[10px] text-muted-foreground">{card.specs}</p>
+                  <a href="#apply" key={i} className="flex-shrink-0 w-32 sm:w-36 rounded-xl overflow-hidden border border-border shadow-md hover:shadow-lg transition-shadow">
+                    <img src={card.img} alt={card.name} className="w-full h-18 sm:h-20 object-cover" />
+                    <div className="bg-secondary p-1.5 sm:p-2">
+                      <p className="font-heading text-xs sm:text-sm font-bold text-secondary-foreground">{card.name}</p>
+                      <p className="text-[9px] sm:text-[10px] text-secondary-foreground/70">{card.specs}</p>
                     </div>
                   </a>
                 ))}
@@ -105,7 +105,7 @@ const HeroSection = () => {
                   alt="Confident student at Bhavishya Computer Education"
                   width={800}
                   height={1024}
-                  className="w-full max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-lg object-cover"
+                  className="w-full h-48 sm:h-64 md:h-auto max-w-none md:max-w-sm lg:max-w-lg object-cover"
                 />
               </div>
             </div>

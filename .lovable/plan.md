@@ -1,93 +1,97 @@
-## Plan: Hero Cleanup, CTA Images, Blog Style, FAQ Categories, Dedicated Pages, WhatsApp/Call Buttons
 
-This is a large set of changes spanning the hero section, CTA banners, blog section, FAQ, form section, dedicated pages, and floating action buttons.
+
+## Plan: Mobile Fix, Navbar Scroll Behavior, Search, Scroll-to-Top, and Section Improvements
+
+### Summary
+Fix hero mobile responsiveness (image visibility, text sizing, course card styling), make navbar hide on scroll with site search, slow down scroll animation, improve CTA/form backgrounds, show all courses on programs page, add header images to all pages, add scroll-to-top button, and add animated search placeholder.
 
 ---
 
-### 1. Hero Section Updates
-
+### 1. Fix Hero Section Mobile Responsiveness
 **File:** `src/components/HeroSection.tsx`
 
-- Remove "ISO Certified Since 2010" badge (top-right of image) and "5000+ Students Placed" badge (bottom-left of image)
-- Change stat from "5000+" to "1500+ Students Trained"
-- Change hero title to something like "Empowering Future-Ready Digital Leaders" or "Build Your Career with Future-Ready Skills"
-- White background instead of gradient (`bg-white` or `bg-background`) & colour of content accordingly so it'll be visible
-- Generate a single confident student image (like Amity reference — professional, confident pose) to replace current group photo
-- Show the student image on mobile too (remove `hidden md:flex`, make it responsive — smaller on mobile, stacked layout)
-- Link all scrolling course cards to `#apply` form
+- Ensure hero image is always visible — set a fixed height on mobile (e.g., `h-48 sm:h-64`) instead of relying on `max-w-[200px]`
+- Increase mobile text size by 1 step (e.g., `text-4xl` base instead of `text-3xl`)
+- Course scrolling cards: add dark navy/black background overlay on the card title area with white text so course names are always readable
+- Slow down scroll animation from `30s` to `45s` in CSS
 
 ---
 
-### 2. CTA Banners with Images
+### 2. Navbar: Hide on Scroll + Site Search Bar
+**File:** `src/components/Navbar.tsx`
 
+- Add scroll detection with `useState`/`useEffect` — hide navbar when scrolling down, show when scrolling up (transform translateY approach)
+- Add a search icon/bar in the navbar (collapsible) for site-wide search with placeholder suggestions
+- Keep sticky behavior but toggle visibility based on scroll direction
+
+---
+
+### 3. Search Bar Animated Placeholders
+**File:** `src/components/CourseCarousel.tsx`
+
+- Add rotating placeholder text in the course search input using `useEffect` + `setInterval`
+- Cycle through: "Search DCA...", "Search BCA...", "Search Tally Prime...", "Search Python..." etc.
+
+---
+
+### 4. CTA Banners — Replace Building Images
 **Files:** `src/components/CTABanner.tsx`, `src/components/CTABanner2.tsx`
 
-- Add a generated background image to both CTA sections (education/campus themed)
-- Use dark overlay for text readability
-- Keep existing text and buttons
+- Generate new CTA background images (abstract educational patterns, no buildings) using AI image gateway
+- Keep dark overlays for readability
 
 ---
 
-### 3. Blog Section Styling
-
-**File:** `src/components/BlogSection.tsx`
-
-- Add a light pastel background color (e.g., `bg-blue-50` or light cream)
-- Change the "Our Students Shine at Campus Placements" blog card image — generate a new one showing students at a placement event/celebration
-- Section title: "Latest News & Blogs"
-
----
-
-### 4. Apply Form Background
-
+### 5. Form Section Background Image
 **File:** `src/components/ApplyForm.tsx`
 
-- Generate a modern educational background image for the form section
-- Apply with dark overlay so form remains readable
+- Generate a modern abstract/educational background image (no buildings)
+- Apply as section background with dark overlay
 
 ---
 
-### 5. FAQ with Categories
+### 6. Blog Section Light Background Fix
+**File:** `src/components/BlogSection.tsx`
 
-**File:** `src/components/FAQSection.tsx`
-
-- Add category filter tabs similar to courses section: "All", "Admissions", "Courses", "Placements", "General"
-- Tag each FAQ with a category and filter with `useState`
+- Already has light gradient — keep as is, just ensure contrast is good
 
 ---
 
-### 6. Dedicated Pages + Routing
+### 7. Courses Page — Show All, Remove "View All" Button
+**File:** `src/pages/CoursesPage.tsx`
 
-**New files + `src/App.tsx`:**
-
-Create dedicated pages with Navbar and Footer:
-
-- `/courses` — `src/pages/CoursesPage.tsx` (full course grid with search/filter, reuses CourseCarousel logic)
-- `/about` — `src/pages/AboutPage.tsx` (about the institute, why choose us, affiliated partners)
-- `/blog` — `src/pages/BlogPage.tsx` (all blog posts in grid)
-- `/contact` — `src/pages/ContactPage.tsx` (apply form + map placeholder + contact info)
-- `/faq` — `src/pages/FAQPage.tsx` (full FAQ with categories)
-
-Update Navbar links to point to these pages. Update Footer links too. Add all routes in `App.tsx`.
+- Instead of reusing `CourseCarousel` (which has slider + "View All" toggle), create a variant or pass a prop to always show grid view with all courses visible per category, no "View All Courses" button
 
 ---
 
-### 7. Floating WhatsApp & Call Buttons
+### 8. Header Images on All Dedicated Pages
+**Files:** `src/pages/AboutPage.tsx`, `src/pages/BlogPage.tsx`, `src/pages/CoursesPage.tsx`, `src/pages/FAQPage.tsx`, `src/pages/ContactPage.tsx`
 
-**New file:** `src/components/FloatingButtons.tsx`
+- Replace plain `bg-secondary` header banners with generated background images + dark overlay for each page
+- Each page gets a contextually relevant header image
 
-- Fixed position on the right side, vertically centered (`fixed right-4 top-1/2 -translate-y-1/2`)
-- Two circular buttons stacked: WhatsApp (green) and Phone Call (blue)
-- WhatsApp links to `https://wa.me/91XXXXXXXXXX`
-- Call links to `tel:+91XXXXXXXXXX`
-- Add to `Index.tsx` layout (and all pages via a shared layout or directly)
+---
+
+### 9. Scroll-to-Top Button
+**File:** `src/components/FloatingButtons.tsx`
+
+- Add a "scroll to top" arrow button below WhatsApp and Call buttons
+- Shows only when user has scrolled down past 400px
+- Smooth scroll to top on click
+
+---
+
+### 10. CSS Animation Speed
+**File:** `src/index.css`
+
+- Slow `animate-scroll-left` from `30s` to `45s`
 
 ---
 
 ### Technical Notes
+- Navbar scroll hide uses `useEffect` with `scroll` event listener and `lastScrollY` ref
+- Animated placeholder uses `useState` + `setInterval` cycling through course names
+- ~7 new images generated via AI gateway (CTA x2, form bg, 5 page headers)
+- CoursesPage will get a `showAll` prop or inline the grid directly instead of using carousel
+- Scroll-to-top uses `window.scrollTo({ top: 0, behavior: 'smooth' })`
 
-- ~7 new images generated via AI gateway (hero student, 2 CTA backgrounds, 1 blog replacement, 1 form background)
-- FAQ categories use same `useState` pattern as courses
-- Dedicated pages reuse existing section components where possible
-- Floating buttons use Lucide `Phone` and a WhatsApp SVG icon
-- All course cards in hero strip get `<a href="#apply">` wrapper

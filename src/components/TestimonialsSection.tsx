@@ -14,47 +14,47 @@ const TestimonialsSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: number) => {
-    scrollRef.current?.scrollBy({ left: dir * 340, behavior: "smooth" });
+    scrollRef.current?.scrollBy({ left: dir * 300, behavior: "smooth" });
   };
 
   return (
-    <section className="py-16 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12 space-y-3">
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Student Reviews</span>
+    <section className="py-12 sm:py-16 bg-background overflow-hidden">
+      <div className="container mx-auto px-4 max-w-full">
+        <div className="text-center mb-8 sm:mb-12 space-y-3">
+          <span className="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wider">Student Reviews</span>
           <h2 className="section-heading">What Our Students Say</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Real stories from real students who built their careers with us.</p>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">Real stories from real students who built their careers with us.</p>
         </div>
 
         <div className="relative">
-          <button onClick={() => scroll(-1)} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
-            <ChevronLeft size={20} className="text-foreground" />
+          <button onClick={() => scroll(-1)} className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card shadow-lg border border-border hidden sm:flex items-center justify-center hover:bg-muted transition-colors">
+            <ChevronLeft size={18} className="text-foreground" />
           </button>
 
-          <div ref={scrollRef} className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2">
+          <div ref={scrollRef} className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2">
             {testimonials.map((t, i) => (
-              <div key={i} className="flex-shrink-0 w-[320px] bg-card rounded-xl border border-border p-6 shadow-sm hover:shadow-lg transition-shadow space-y-4">
+              <div key={i} className="flex-shrink-0 w-[270px] sm:w-[320px] bg-card rounded-xl border border-border p-4 sm:p-6 shadow-sm hover:shadow-lg transition-shadow space-y-3 sm:space-y-4">
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} size={16} className={s < t.rating ? "fill-primary text-primary" : "text-border"} />
+                    <Star key={s} size={14} className={s < t.rating ? "fill-primary text-primary" : "text-border"} />
                   ))}
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">"{t.text}"</p>
+                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-4">"{t.text}"</p>
                 <div className="flex items-center gap-3 pt-2 border-t border-border">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground font-bold text-sm">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground font-bold text-xs sm:text-sm flex-shrink-0">
                     {t.name.split(" ").map(n => n[0]).join("")}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.course} · Batch {t.batch}</p>
+                    <p className="font-semibold text-xs sm:text-sm text-foreground">{t.name}</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">{t.course} · Batch {t.batch}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <button onClick={() => scroll(1)} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
-            <ChevronRight size={20} className="text-foreground" />
+          <button onClick={() => scroll(1)} className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card shadow-lg border border-border hidden sm:flex items-center justify-center hover:bg-muted transition-colors">
+            <ChevronRight size={18} className="text-foreground" />
           </button>
         </div>
       </div>

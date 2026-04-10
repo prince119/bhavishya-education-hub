@@ -29,40 +29,40 @@ const BlogSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: number) => {
-    scrollRef.current?.scrollBy({ left: dir * 360, behavior: "smooth" });
+    scrollRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
   };
 
   return (
-    <section className="py-16" style={{ background: "linear-gradient(135deg, hsl(210 40% 96%), hsl(40 30% 96%))" }}>
-      <div className="container mx-auto px-4">
-        <div className="text-center space-y-3 mb-12">
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Blog</span>
+    <section className="py-12 sm:py-16 overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(210 40% 96%), hsl(40 30% 96%))" }}>
+      <div className="container mx-auto px-4 max-w-full">
+        <div className="text-center space-y-3 mb-8 sm:mb-12">
+          <span className="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wider">Our Blog</span>
           <h2 className="section-heading">Latest News & Blogs</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Stay updated with the latest in technology, education tips, and career guidance.</p>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">Stay updated with the latest in technology, education tips, and career guidance.</p>
         </div>
 
         <div className="relative">
-          <button onClick={() => scroll(-1)} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
-            <ChevronLeft size={20} className="text-foreground" />
+          <button onClick={() => scroll(-1)} className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card shadow-lg border border-border hidden sm:flex items-center justify-center hover:bg-muted transition-colors">
+            <ChevronLeft size={18} className="text-foreground" />
           </button>
 
-          <div ref={scrollRef} className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2">
+          <div ref={scrollRef} className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-2">
             {blogs.map((b, i) => (
-              <article key={i} className="flex-shrink-0 w-[340px] bg-card rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group">
-                <div className="relative h-48 overflow-hidden">
+              <article key={i} className="flex-shrink-0 w-[280px] sm:w-[340px] bg-card rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group">
+                <div className="relative h-40 sm:h-48 overflow-hidden">
                   <img src={b.img} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                   <span className={`absolute top-3 left-3 text-xs font-semibold px-3 py-1 rounded-full ${categoryColors[b.category] || "bg-primary/10 text-primary"}`}>
                     {b.category}
                   </span>
                 </div>
-                <div className="p-5 space-y-3">
+                <div className="p-4 sm:p-5 space-y-2 sm:space-y-3">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Calendar size={12} />
                     <span>{b.date}</span>
                   </div>
-                  <h3 className="font-heading text-base font-semibold text-foreground leading-snug line-clamp-2">{b.title}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{b.excerpt}</p>
-                  <a href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                  <h3 className="font-heading text-sm sm:text-base font-semibold text-foreground leading-snug line-clamp-2">{b.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{b.excerpt}</p>
+                  <a href="/blog" className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary hover:underline">
                     Read More <ArrowRight size={14} />
                   </a>
                 </div>
@@ -70,8 +70,8 @@ const BlogSection = () => {
             ))}
           </div>
 
-          <button onClick={() => scroll(1)} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card shadow-lg border border-border flex items-center justify-center hover:bg-muted transition-colors">
-            <ChevronRight size={20} className="text-foreground" />
+          <button onClick={() => scroll(1)} className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card shadow-lg border border-border hidden sm:flex items-center justify-center hover:bg-muted transition-colors">
+            <ChevronRight size={18} className="text-foreground" />
           </button>
         </div>
       </div>

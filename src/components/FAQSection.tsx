@@ -33,18 +33,18 @@ const FAQSection = () => {
   const filtered = activeCat === "all" ? faqs : faqs.filter(f => f.cat === activeCat);
 
   return (
-    <section id="faq" className="py-16 bg-background">
+    <section id="faq" className="py-12 sm:py-16 bg-background overflow-hidden">
       <div className="container mx-auto px-4 max-w-3xl">
-        <div className="text-center space-y-3 mb-8">
+        <div className="text-center space-y-3 mb-6 sm:mb-8">
           <h2 className="section-heading">Frequently Asked Questions</h2>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8">
           {faqCategories.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setActiveCat(cat.key)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
                 activeCat === cat.key
                   ? "bg-secondary text-secondary-foreground shadow"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -57,11 +57,11 @@ const FAQSection = () => {
 
         <Accordion type="single" collapsible className="space-y-3">
           {filtered.map((faq, i) => (
-            <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-lg border border-border px-5">
-              <AccordionTrigger className="text-left font-medium text-foreground hover:text-primary">
+            <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-lg border border-border px-4 sm:px-5">
+              <AccordionTrigger className="text-left font-medium text-sm sm:text-base text-foreground hover:text-primary">
                 {faq.q}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-sm">
+              <AccordionContent className="text-muted-foreground text-xs sm:text-sm">
                 {faq.a}
               </AccordionContent>
             </AccordionItem>

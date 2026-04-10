@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, User, Search, ChevronUp } from "lucide-react";
+import { Menu, X, User, Search } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
 const searchSuggestions = ["DCA", "BCA", "PGDCA", "Tally Prime", "Python", "Web Design", "MS Office", "B.Com"];
@@ -32,24 +32,24 @@ const Navbar = () => {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-secondary py-2 text-center">
-        <p className="text-sm font-medium text-primary">
+      <div className="bg-secondary py-1.5 sm:py-2 text-center px-4 overflow-hidden">
+        <p className="text-xs sm:text-sm font-medium text-primary truncate">
           🎓 New Batch Starting Soon — Admissions Open for July 2026!
         </p>
       </div>
 
       {/* Main nav */}
       <nav
-        className={`bg-card shadow-sm sticky top-0 z-50 transition-transform duration-300 ${
+        className={`bg-card shadow-sm sticky top-0 z-50 transition-transform duration-300 w-full max-w-full ${
           showNav ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="container mx-auto flex items-center justify-between py-3 px-4">
+        <div className="container mx-auto flex items-center justify-between py-2 sm:py-3 px-4 max-w-full">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
-            <img src={logo} alt="Bhavishya Computer Education" className="h-14 w-14 object-contain rounded" />
+          <a href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <img src={logo} alt="Bhavishya Computer Education" className="h-10 w-10 sm:h-14 sm:w-14 object-contain rounded" />
             <div className="hidden sm:block">
-              <h1 className="font-heading text-lg font-bold leading-tight text-charcoal">Bhavishya</h1>
+              <h1 className="font-heading text-base sm:text-lg font-bold leading-tight text-charcoal">Bhavishya</h1>
               <p className="text-xs text-muted-foreground">Computer Education</p>
             </div>
           </a>
@@ -88,7 +88,7 @@ const Navbar = () => {
             >
               <Search size={16} />
             </button>
-            <button onClick={() => setIsOpen(!isOpen)} className="text-foreground">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-foreground p-1">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -114,13 +114,13 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden bg-card border-t border-border px-4 py-4 space-y-3">
-            <a href="/courses" className="block text-sm font-medium text-foreground">Programs</a>
-            <a href="/about" className="block text-sm font-medium text-foreground">About Us</a>
-            <a href="/blog" className="block text-sm font-medium text-foreground">Blog</a>
-            <a href="/faq" className="block text-sm font-medium text-foreground">FAQ</a>
-            <a href="/contact" className="block text-sm font-medium text-foreground">Contact</a>
-            <a href="/student-login" className="block text-sm font-medium text-foreground">Student Login</a>
-            <a href="/contact" className="btn-gold text-sm py-2 px-5 inline-block">Apply Now</a>
+            <a href="/courses" className="block text-sm font-medium text-foreground py-1">Programs</a>
+            <a href="/about" className="block text-sm font-medium text-foreground py-1">About Us</a>
+            <a href="/blog" className="block text-sm font-medium text-foreground py-1">Blog</a>
+            <a href="/faq" className="block text-sm font-medium text-foreground py-1">FAQ</a>
+            <a href="/contact" className="block text-sm font-medium text-foreground py-1">Contact</a>
+            <a href="/student-login" className="block text-sm font-medium text-foreground py-1">Student Login</a>
+            <a href="/contact" className="btn-gold text-sm py-2.5 px-5 inline-block w-full text-center">Apply Now</a>
           </div>
         )}
       </nav>

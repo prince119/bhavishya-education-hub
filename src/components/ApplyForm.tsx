@@ -14,46 +14,46 @@ const ApplyForm = () => {
   return (
     <section
       id="apply"
-      className="py-16 relative"
+      className="py-12 sm:py-16 relative overflow-hidden"
       style={{ backgroundImage: `url(${formBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
     >
       <div className="absolute inset-0 bg-secondary/90" />
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 items-start">
+      <div className="container mx-auto px-4 relative z-10 max-w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
           {/* Left info */}
-          <div className="space-y-6">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-secondary-foreground">Start Your Journey Today</h2>
-            <p className="text-secondary-foreground/70">
+          <div className="space-y-5 sm:space-y-6">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-secondary-foreground">Start Your Journey Today</h2>
+            <p className="text-sm sm:text-base text-secondary-foreground/70">
               Fill in the form and our counsellor will get in touch with you to guide through the admission process.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center">📍</div>
+                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">📍</div>
                 <div>
                   <p className="text-sm font-medium text-secondary-foreground">Visit Us</p>
-                  <p className="text-sm text-secondary-foreground/70">Main Branch, Your City, State</p>
+                  <p className="text-xs sm:text-sm text-secondary-foreground/70">Balrampur - Samri - Kusmi Rd, Kusmi, Chhattisgarh 497224, India</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center">📞</div>
+                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">📞</div>
                 <div>
                   <p className="text-sm font-medium text-secondary-foreground">Call Us</p>
-                  <p className="text-sm text-secondary-foreground/70">+91 XXXXX XXXXX</p>
+                  <p className="text-xs sm:text-sm text-secondary-foreground/70">+91 91712 78014</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center">✉️</div>
+                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">✉️</div>
                 <div>
                   <p className="text-sm font-medium text-secondary-foreground">Email</p>
-                  <p className="text-sm text-secondary-foreground/70">info@bhavishyaedu.com</p>
+                  <p className="text-xs sm:text-sm text-secondary-foreground/70">Office@bhavishyaedu.in</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right form */}
-          <div className="bg-card rounded-xl shadow-lg border border-border p-8">
-            <h3 className="font-heading text-2xl font-bold text-foreground text-center mb-6">Apply Now</h3>
+          <div className="bg-card rounded-xl shadow-lg border border-border p-5 sm:p-8">
+            <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground text-center mb-5 sm:mb-6">Apply Now</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-foreground mb-1 block">Full Name *</label>
@@ -74,7 +74,7 @@ const ApplyForm = () => {
                   <option>DCA</option><option>BCA</option><option>PGDCA</option><option>MA</option><option>BA</option><option>B.Com</option><option>Tally Prime</option><option>MS Office</option><option>Web Design</option><option>Python</option>
                 </select>
               </div>
-              <button type="submit" className="btn-gold w-full text-base py-3">Submit Application</button>
+              <button type="submit" className="btn-gold w-full text-sm sm:text-base py-3">Submit Application</button>
             </form>
           </div>
         </div>

@@ -1,97 +1,105 @@
 
 
-## Plan: Mobile Fix, Navbar Scroll Behavior, Search, Scroll-to-Top, and Section Improvements
+## Plan: Contact Info, Mobile Responsiveness, Footer Background, Course Image Fix, and UI Polish
 
-### Summary
-Fix hero mobile responsiveness (image visibility, text sizing, course card styling), make navbar hide on scroll with site search, slow down scroll animation, improve CTA/form backgrounds, show all courses on programs page, add header images to all pages, add scroll-to-top button, and add animated search placeholder.
-
----
-
-### 1. Fix Hero Section Mobile Responsiveness
-**File:** `src/components/HeroSection.tsx`
-
-- Ensure hero image is always visible — set a fixed height on mobile (e.g., `h-48 sm:h-64`) instead of relying on `max-w-[200px]`
-- Increase mobile text size by 1 step (e.g., `text-4xl` base instead of `text-3xl`)
-- Course scrolling cards: add dark navy/black background overlay on the card title area with white text so course names are always readable
-- Slow down scroll animation from `30s` to `45s` in CSS
+This is a comprehensive update covering contact details, global mobile responsiveness, and multiple UI fixes.
 
 ---
 
-### 2. Navbar: Hide on Scroll + Site Search Bar
-**File:** `src/components/Navbar.tsx`
+### 1. Update Contact Details Everywhere
 
-- Add scroll detection with `useState`/`useEffect` — hide navbar when scrolling down, show when scrolling up (transform translateY approach)
-- Add a search icon/bar in the navbar (collapsible) for site-wide search with placeholder suggestions
-- Keep sticky behavior but toggle visibility based on scroll direction
+**Files:** `FloatingButtons.tsx`, `ApplyForm.tsx`, `ContactPage.tsx`, `Footer.tsx`
 
----
-
-### 3. Search Bar Animated Placeholders
-**File:** `src/components/CourseCarousel.tsx`
-
-- Add rotating placeholder text in the course search input using `useEffect` + `setInterval`
-- Cycle through: "Search DCA...", "Search BCA...", "Search Tally Prime...", "Search Python..." etc.
+- WhatsApp: `https://wa.me/919171278014`
+- Call: `tel:+919171278014`
+- Email: `Office@bhavishyaedu.in`
+- Address: `Balrampur - Samri - Kusmi Rd, Kusmi, Chhattisgarh 497224, India`
+- Update all placeholder `XXXXXXXXXX` values across the site
 
 ---
 
-### 4. CTA Banners — Replace Building Images
-**Files:** `src/components/CTABanner.tsx`, `src/components/CTABanner2.tsx`
+### 2. Footer Background Image
 
-- Generate new CTA background images (abstract educational patterns, no buildings) using AI image gateway
-- Keep dark overlays for readability
+**File:** `Footer.tsx`
 
----
-
-### 5. Form Section Background Image
-**File:** `src/components/ApplyForm.tsx`
-
-- Generate a modern abstract/educational background image (no buildings)
-- Apply as section background with dark overlay
+- Generate a subtle dark educational background image
+- Apply with dark overlay (`bg-secondary/95`) so text stays readable
+- Keep existing footer layout
 
 ---
 
-### 6. Blog Section Light Background Fix
-**File:** `src/components/BlogSection.tsx`
+### 3. Fix Course Card Image Blinking
 
-- Already has light gradient — keep as is, just ensure contrast is good
+**File:** `CourseCarousel.tsx`
 
----
-
-### 7. Courses Page — Show All, Remove "View All" Button
-**File:** `src/pages/CoursesPage.tsx`
-
-- Instead of reusing `CourseCarousel` (which has slider + "View All" toggle), create a variant or pass a prop to always show grid view with all courses visible per category, no "View All Courses" button
+- The blinking is caused by images re-rendering on state changes (placeholder cycling triggers re-renders)
+- Add `loading="lazy"` and ensure images aren't re-mounted by stabilizing keys
+- Memoize `CourseCard` component with `React.memo`
 
 ---
 
-### 8. Header Images on All Dedicated Pages
-**Files:** `src/pages/AboutPage.tsx`, `src/pages/BlogPage.tsx`, `src/pages/CoursesPage.tsx`, `src/pages/FAQPage.tsx`, `src/pages/ContactPage.tsx`
+### 4. Hero Section Mobile Responsiveness
 
-- Replace plain `bg-secondary` header banners with generated background images + dark overlay for each page
-- Each page gets a contextually relevant header image
+**File:** `HeroSection.tsx`
 
----
-
-### 9. Scroll-to-Top Button
-**File:** `src/components/FloatingButtons.tsx`
-
-- Add a "scroll to top" arrow button below WhatsApp and Call buttons
-- Shows only when user has scrolled down past 400px
-- Smooth scroll to top on click
+- Image on top of content on mobile (already `order-1`/`order-2` — ensure it works)
+- Reduce heading to `text-2xl` on mobile, `text-4xl md:text-5xl lg:text-6xl`
+- Reduce paragraph text to `text-sm` on mobile
+- Buttons stack vertically on mobile: `flex-col sm:flex-row`
+- Stats: smaller text on mobile
+- Scrolling course strip: narrower cards on mobile (`w-28`)
+- Remove `max-w-none` from hero image, use `w-full h-auto object-cover`
 
 ---
 
-### 10. CSS Animation Speed
+### 5. Global Mobile Responsiveness (index.css + All Components)
+
 **File:** `src/index.css`
 
-- Slow `animate-scroll-left` from `30s` to `45s`
+Add global overflow protection:
+```css
+html, body { overflow-x: hidden; }
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+```
+
+**All section components** — apply these patterns:
+- `overflow-hidden` on all section/container elements
+- `max-w-full` where needed
+- `px-4` padding on all containers
+- Replace any fixed `w-[XXXpx]` with responsive alternatives on mobile
+- Text: `break-words` where needed
+
+**Specific fixes per component:**
+
+- **Navbar:** Already has hamburger. Ensure `w-full px-4` on header. Logo + hamburger on one line.
+- **AffiliatedPartners:** Add `overflow-hidden` to section wrapper
+- **WhyChooseUs:** Cards `w-[280px] sm:w-[300px]`
+- **TestimonialsSection:** Cards `w-[280px] sm:w-[320px]`
+- **BlogSection:** Cards `w-[300px] sm:w-[340px]`, section `overflow-hidden`
+- **CTABanner/CTABanner2:** Add `overflow-hidden`, text responsive sizes
+- **ApplyForm:** Grid single column on mobile (already `md:grid-cols-2`)
+- **FAQSection:** Category buttons wrap properly, accordion full width
+- **Footer:** Already `sm:grid-cols-2 lg:grid-cols-4`, add `text-center sm:text-left` on mobile
+- **FloatingButtons:** Reduce button size on mobile `w-10 h-10 sm:w-12 sm:h-12`
+
+**Page headers:** All dedicated pages — heading `text-2xl sm:text-4xl`, subtext `text-sm`
+
+---
+
+### 6. Slider Arrow Buttons — Mobile Fix
+
+All slider sections (Courses, WhyChooseUs, Testimonials, Blog):
+- Hide arrow buttons on mobile (`hidden sm:flex`) since users can swipe
+- Or make them smaller and position them within bounds (not `-left-4` which overflows)
 
 ---
 
 ### Technical Notes
-- Navbar scroll hide uses `useEffect` with `scroll` event listener and `lastScrollY` ref
-- Animated placeholder uses `useState` + `setInterval` cycling through course names
-- ~7 new images generated via AI gateway (CTA x2, form bg, 5 page headers)
-- CoursesPage will get a `showAll` prop or inline the grid directly instead of using carousel
-- Scroll-to-top uses `window.scrollTo({ top: 0, behavior: 'smooth' })`
+
+- ~1 new image generated (footer background)
+- `React.memo` on CourseCard to prevent image blinking
+- Global CSS rules prevent any horizontal overflow
+- All responsive changes use Tailwind mobile-first breakpoints
+- Touch targets minimum 44px maintained on mobile buttons
 

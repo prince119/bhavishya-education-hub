@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { MapPin, Phone as PhoneIcon, Mail } from "lucide-react";
 import formBg from "@/assets/form-bg.jpg";
 
 const ApplyForm = () => {
@@ -22,30 +23,36 @@ const ApplyForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
           {/* Left info */}
           <div className="space-y-5 sm:space-y-6">
-            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-secondary-foreground">Start Your Journey Today</h2>
-            <p className="text-sm sm:text-base text-secondary-foreground/70">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-white">Start Your Journey Today</h2>
+            <p className="text-sm sm:text-base text-white/70">
               Fill in the form and our counsellor will get in touch with you to guide through the admission process.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">📍</div>
+                <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center flex-shrink-0">
+                  <MapPin size={18} className="text-white" />
+                </div>
                 <div>
-                  <p className="text-sm font-medium text-secondary-foreground">Visit Us</p>
-                  <p className="text-xs sm:text-sm text-secondary-foreground/70">Balrampur - Samri - Kusmi Rd, Kusmi, Chhattisgarh 497224, India</p>
+                  <p className="text-sm font-medium text-white">Visit Us</p>
+                  <p className="text-xs sm:text-sm text-white/70">Balrampur - Samri - Kusmi Rd, Kusmi, Chhattisgarh 497224, India</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">📞</div>
+                <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center flex-shrink-0">
+                  <PhoneIcon size={18} className="text-white" />
+                </div>
                 <div>
-                  <p className="text-sm font-medium text-secondary-foreground">Call Us</p>
-                  <p className="text-xs sm:text-sm text-secondary-foreground/70">+91 91712 78014</p>
+                  <p className="text-sm font-medium text-white">Call Us</p>
+                  <p className="text-xs sm:text-sm text-white/70">+91 91712 78014</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">✉️</div>
+                <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center flex-shrink-0">
+                  <Mail size={18} className="text-white" />
+                </div>
                 <div>
-                  <p className="text-sm font-medium text-secondary-foreground">Email</p>
-                  <p className="text-xs sm:text-sm text-secondary-foreground/70">Office@bhavishyaedu.in</p>
+                  <p className="text-sm font-medium text-white">Email</p>
+                  <p className="text-xs sm:text-sm text-white/70">Office@bhavishyaedu.in</p>
                 </div>
               </div>
             </div>

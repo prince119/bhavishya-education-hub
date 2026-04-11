@@ -1,105 +1,83 @@
-
-
-## Plan: Contact Info, Mobile Responsiveness, Footer Background, Course Image Fix, and UI Polish
-
-This is a comprehensive update covering contact details, global mobile responsiveness, and multiple UI fixes.
+## Plan: Mobile Layout Like Amity Reference, Footer Fix, Form Section, Contact Page with Maps, Text Contrast Fixes add gallary section social icons at hamburger in mobile view instagram link [https://www.instagram.com/bhavishyacomputereducation.hq/](https://www.instagram.com/bhavishyacomputereducation.hq/)
 
 ---
 
-### 1. Update Contact Details Everywhere
+### 1. Navbar Mobile Redesign (Like Amity Reference)
 
-**Files:** `FloatingButtons.tsx`, `ApplyForm.tsx`, `ContactPage.tsx`, `Footer.tsx`
+**File:** `src/components/Navbar.tsx`
 
-- WhatsApp: `https://wa.me/919171278014`
-- Call: `tel:+919171278014`
-- Email: `Office@bhavishyaedu.in`
-- Address: `Balrampur - Samri - Kusmi Rd, Kusmi, Chhattisgarh 497224, India`
-- Update all placeholder `XXXXXXXXXX` values across the site
+- Reorder mobile layout: Hamburger on LEFT next to logo, "Apply Now" button + Call icon on RIGHT
+- Search bar always visible below navbar on mobile (not collapsible) with animated placeholder
+- Remove search icon from mobile top bar, keep it in the always-visible search row below
 
 ---
 
-### 2. Footer Background Image
+### 2. Hero Section Mobile Fix
 
-**File:** `Footer.tsx`
+**File:** `src/components/HeroSection.tsx`
 
-- Generate a subtle dark educational background image
-- Apply with dark overlay (`bg-secondary/95`) so text stays readable
-- Keep existing footer layout
-
----
-
-### 3. Fix Course Card Image Blinking
-
-**File:** `CourseCarousel.tsx`
-
-- The blinking is caused by images re-rendering on state changes (placeholder cycling triggers re-renders)
-- Add `loading="lazy"` and ensure images aren't re-mounted by stabilizing keys
-- Memoize `CourseCard` component with `React.memo`
+- On mobile: hero image/banner on TOP (full width), text content below — smaller text sizes (`text-xl` heading, `text-xs` paragraph)
+- Or convert to a hero slider (image as background with overlay text) on mobile
+- Course scrolling cards visible below CTA buttons
+- Reduce all text sizes for mobile readability
 
 ---
 
-### 4. Hero Section Mobile Responsiveness
+### 3. Floating Buttons — Move to Bottom Right
 
-**File:** `HeroSection.tsx`
+**File:** `src/components/FloatingButtons.tsx`
 
-- Image on top of content on mobile (already `order-1`/`order-2` — ensure it works)
-- Reduce heading to `text-2xl` on mobile, `text-4xl md:text-5xl lg:text-6xl`
-- Reduce paragraph text to `text-sm` on mobile
-- Buttons stack vertically on mobile: `flex-col sm:flex-row`
-- Stats: smaller text on mobile
-- Scrolling course strip: narrower cards on mobile (`w-28`)
-- Remove `max-w-none` from hero image, use `w-full h-auto object-cover`
+- Move WhatsApp + scroll-to-top to `fixed bottom-4 right-4` (bottom-right corner)
+- Remove call button from floating (it's in navbar now)
+- Link call button in navbar to `tel:+919171278014`
 
 ---
 
-### 5. Global Mobile Responsiveness (index.css + All Components)
+### 4. Footer Fixes
 
-**File:** `src/index.css`
+**File:** `src/components/Footer.tsx`
 
-Add global overflow protection:
-```css
-html, body { overflow-x: hidden; }
-* { box-sizing: border-box; }
-img { max-width: 100%; height: auto; }
-```
-
-**All section components** — apply these patterns:
-- `overflow-hidden` on all section/container elements
-- `max-w-full` where needed
-- `px-4` padding on all containers
-- Replace any fixed `w-[XXXpx]` with responsive alternatives on mobile
-- Text: `break-words` where needed
-
-**Specific fixes per component:**
-
-- **Navbar:** Already has hamburger. Ensure `w-full px-4` on header. Logo + hamburger on one line.
-- **AffiliatedPartners:** Add `overflow-hidden` to section wrapper
-- **WhyChooseUs:** Cards `w-[280px] sm:w-[300px]`
-- **TestimonialsSection:** Cards `w-[280px] sm:w-[320px]`
-- **BlogSection:** Cards `w-[300px] sm:w-[340px]`, section `overflow-hidden`
-- **CTABanner/CTABanner2:** Add `overflow-hidden`, text responsive sizes
-- **ApplyForm:** Grid single column on mobile (already `md:grid-cols-2`)
-- **FAQSection:** Category buttons wrap properly, accordion full width
-- **Footer:** Already `sm:grid-cols-2 lg:grid-cols-4`, add `text-center sm:text-left` on mobile
-- **FloatingButtons:** Reduce button size on mobile `w-10 h-10 sm:w-12 sm:h-12`
-
-**Page headers:** All dedicated pages — heading `text-2xl sm:text-4xl`, subtext `text-sm`
+- Fix logo: remove `h-12 w-12` constraint, use `h-14 w-auto` so it's not compressed
+- Change all footer text to white: replace `text-secondary-foreground/70` with `text-white/80`
+- Footer headings: `text-white` instead of `text-primary`
+- Copyright: `text-white/50`
+- Generate a real background image for footer (dark campus/education themed)
 
 ---
 
-### 6. Slider Arrow Buttons — Mobile Fix
+### 5. "Start Your Journey" (ApplyForm) Section Fix
 
-All slider sections (Courses, WhyChooseUs, Testimonials, Blog):
-- Hide arrow buttons on mobile (`hidden sm:flex`) since users can swipe
-- Or make them smaller and position them within bounds (not `-left-4` which overflows)
+**File:** `src/components/ApplyForm.tsx`
+
+- Fix text color: heading and body text use `text-white` for visibility on dark background
+- Fix icon circles: use visible colors like `bg-primary/30` with white emoji or Lucide icons in white
+- Generate and add a proper background image for this section
+
+---
+
+### 6. Contact Page with Google Maps
+
+**File:** `src/pages/ContactPage.tsx`
+
+- Replace map placeholder with actual Google Maps iframe embed for "Kusmi, Chhattisgarh 497224"
+- Keep contact cards and apply form
+
+---
+
+### 7. Text Contrast Audit — All Dark Background Sections
+
+**Files:** `CTABanner.tsx`, `CTABanner2.tsx`, `ApplyForm.tsx`, `Footer.tsx`
+
+- Audit every section with dark `bg-secondary` or overlay background
+- Replace `text-secondary-foreground/70` with `text-white/80` or `text-white/70`
+- Replace `text-secondary-foreground` with `text-white`
+- Ensure all headings on dark backgrounds use `text-white`
 
 ---
 
 ### Technical Notes
 
-- ~1 new image generated (footer background)
-- `React.memo` on CourseCard to prevent image blinking
-- Global CSS rules prevent any horizontal overflow
-- All responsive changes use Tailwind mobile-first breakpoints
-- Touch targets minimum 44px maintained on mobile buttons
-
+- ~1 new footer background image generated
+- Navbar call button uses `tel:+919171278014`
+- Google Maps iframe with actual coordinates for Kusmi location
+- All color fixes use explicit `text-white` instead of CSS variable-based foreground colors for reliability on dark backgrounds

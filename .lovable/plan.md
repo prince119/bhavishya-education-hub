@@ -1,83 +1,30 @@
-## Plan: Mobile Layout Like Amity Reference, Footer Fix, Form Section, Contact Page with Maps, Text Contrast Fixes add gallary section social icons at hamburger in mobile view instagram link [https://www.instagram.com/bhavishyacomputereducation.hq/](https://www.instagram.com/bhavishyacomputereducation.hq/)
 
----
 
-### 1. Navbar Mobile Redesign (Like Amity Reference)
+## Plan: Hero Section Mobile Layout Like Amity Reference
 
-**File:** `src/components/Navbar.tsx`
+Based on the Amity Online reference screenshot, the mobile hero should show:
+- Student image on the RIGHT side next to text (side-by-side layout even on mobile), not in a frame/border — just the raw image
+- Text on the LEFT, smaller and compact
+- No rounded border or shadow frame around the image
 
-- Reorder mobile layout: Hamburger on LEFT next to logo, "Apply Now" button + Call icon on RIGHT
-- Search bar always visible below navbar on mobile (not collapsible) with animated placeholder
-- Remove search icon from mobile top bar, keep it in the always-visible search row below
+### Changes to `src/components/HeroSection.tsx`
 
----
+1. **Remove image frame on mobile**: Remove `rounded-2xl`, `shadow-2xl`, `border-4 border-primary/20` wrapper on mobile — show raw image. Keep frame on desktop only.
 
-### 2. Hero Section Mobile Fix
+2. **Side-by-side layout on mobile**: Instead of stacking (image on top, text below), use a 2-column layout on mobile too — text left, image right, like the Amity reference. Use `grid grid-cols-2` on mobile with the image taking less space.
 
-**File:** `src/components/HeroSection.tsx`
+3. **Mobile layout**: 
+   - Badge + heading + subtitle on left column
+   - Student image on right column (no frame, just `object-cover` with transparent/cutout look)
+   - Buttons, course strip, and stats span full width below
 
-- On mobile: hero image/banner on TOP (full width), text content below — smaller text sizes (`text-xl` heading, `text-xs` paragraph)
-- Or convert to a hero slider (image as background with overlay text) on mobile
-- Course scrolling cards visible below CTA buttons
-- Reduce all text sizes for mobile readability
+4. **Text sizing**: Keep heading at `text-xl` on mobile, paragraph at `text-xs` — compact like reference
 
----
+5. **Generate new hero image**: Generate a confident student image with transparent/clean background (like the Amity reference where the student appears without a frame, just placed on the light background)
 
-### 3. Floating Buttons — Move to Bottom Right
+### Technical Approach
 
-**File:** `src/components/FloatingButtons.tsx`
+- Restructure the grid: on mobile, top section is 2-col (text + image side by side), bottom section is full-width (buttons, course strip, stats)
+- Remove all border/shadow/rounded from image container on mobile using responsive classes
+- Image uses `object-cover` with no container styling on mobile
 
-- Move WhatsApp + scroll-to-top to `fixed bottom-4 right-4` (bottom-right corner)
-- Remove call button from floating (it's in navbar now)
-- Link call button in navbar to `tel:+919171278014`
-
----
-
-### 4. Footer Fixes
-
-**File:** `src/components/Footer.tsx`
-
-- Fix logo: remove `h-12 w-12` constraint, use `h-14 w-auto` so it's not compressed
-- Change all footer text to white: replace `text-secondary-foreground/70` with `text-white/80`
-- Footer headings: `text-white` instead of `text-primary`
-- Copyright: `text-white/50`
-- Generate a real background image for footer (dark campus/education themed)
-
----
-
-### 5. "Start Your Journey" (ApplyForm) Section Fix
-
-**File:** `src/components/ApplyForm.tsx`
-
-- Fix text color: heading and body text use `text-white` for visibility on dark background
-- Fix icon circles: use visible colors like `bg-primary/30` with white emoji or Lucide icons in white
-- Generate and add a proper background image for this section
-
----
-
-### 6. Contact Page with Google Maps
-
-**File:** `src/pages/ContactPage.tsx`
-
-- Replace map placeholder with actual Google Maps iframe embed for "Kusmi, Chhattisgarh 497224"
-- Keep contact cards and apply form
-
----
-
-### 7. Text Contrast Audit — All Dark Background Sections
-
-**Files:** `CTABanner.tsx`, `CTABanner2.tsx`, `ApplyForm.tsx`, `Footer.tsx`
-
-- Audit every section with dark `bg-secondary` or overlay background
-- Replace `text-secondary-foreground/70` with `text-white/80` or `text-white/70`
-- Replace `text-secondary-foreground` with `text-white`
-- Ensure all headings on dark backgrounds use `text-white`
-
----
-
-### Technical Notes
-
-- ~1 new footer background image generated
-- Navbar call button uses `tel:+919171278014`
-- Google Maps iframe with actual coordinates for Kusmi location
-- All color fixes use explicit `text-white` instead of CSS variable-based foreground colors for reliability on dark backgrounds

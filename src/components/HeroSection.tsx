@@ -41,8 +41,8 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 py-4 sm:py-8 md:py-20 relative z-10 max-w-full overflow-hidden">
         <div className="grid md:grid-cols-2 gap-4 md:gap-10 items-center">
           {/* Left content */}
-          <div className="space-y-3 md:space-y-6 order-2 md:order-1">
-            <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1.5 border border-primary/30">
+          <div className="space-y-3 md:space-y-6 order-1 md:order-1 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1.5 border border-primary/30 mx-auto md:mx-0">
               <Award size={12} className="text-primary flex-shrink-0 sm:w-[14px] sm:h-[14px]" />
               <span className="text-[11px] sm:text-sm font-medium text-primary">Admissions Open for July 2026</span>
             </div>
@@ -54,14 +54,14 @@ const HeroSection = () => {
               </span>
             </h1>
 
-            <p className="text-xs sm:text-sm md:text-lg text-muted-foreground max-w-lg">
+            <p className="text-xs sm:text-sm md:text-lg text-muted-foreground max-w-lg mx-auto md:mx-0">
               Join <strong className="text-primary">1500+</strong> successful students who built
               future-ready digital skills through our industry-recognized programs.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-              <a href="#apply" className="btn-gold text-sm text-center w-full sm:w-auto py-2.5 sm:py-3">Apply Now</a>
-              <a href="#courses" className="border-2 border-secondary text-secondary font-semibold px-5 py-2.5 sm:py-3 rounded-lg hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 text-sm text-center w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center md:justify-start">
+              <a href="#apply" className="btn-gold text-base text-center w-full sm:w-auto px-8 py-3">Apply Now</a>
+              <a href="#courses" className="border-2 border-secondary text-secondary font-semibold px-8 py-3 rounded-lg hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 text-base text-center w-full sm:w-auto">
                 Explore Courses
               </a>
             </div>
@@ -82,7 +82,7 @@ const HeroSection = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex gap-4 sm:gap-6 md:gap-8 pt-1 sm:pt-2">
+            <div className="flex gap-4 sm:gap-6 md:gap-8 pt-1 sm:pt-2 justify-center md:justify-start">
               {[
                 { val: "1500+", label: "Students Trained" },
                 { val: "15+", label: "Courses Offered" },
@@ -97,13 +97,13 @@ const HeroSection = () => {
           </div>
 
           {/* Right - hero image */}
-          <div className="flex justify-center order-1 md:order-2">
-            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+          <div className="flex justify-center order-2 md:order-2">
+            <div className="relative w-full max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg">
               <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20">
                 <img
                   src={heroStudent}
                   alt="Confident student at Bhavishya Computer Education"
-                  className="w-full h-44 sm:h-56 md:h-auto object-cover"
+                  className="w-full h-52 sm:h-56 md:h-auto object-cover"
                 />
               </div>
             </div>

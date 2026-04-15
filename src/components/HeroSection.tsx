@@ -29,11 +29,14 @@ const HeroSection = () => {
     <section className="relative overflow-hidden bg-gradient-to-br from-blue-50/60 via-background to-amber-50/40">
       {/* Decorative square boxes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-10 left-8 w-16 h-16 border-2 border-primary/15 rounded-lg rotate-12 hidden md:block" />
-        <div className="absolute top-32 right-12 w-10 h-10 border-2 border-secondary/10 rounded-md -rotate-6 hidden md:block" />
-        <div className="absolute bottom-20 left-16 w-12 h-12 border-2 border-primary/10 rounded-lg rotate-45 hidden md:block" />
-        <div className="absolute top-1/2 right-1/4 w-20 h-20 border-2 border-blue-200/20 rounded-xl rotate-12 hidden md:block" />
-        <div className="absolute bottom-32 right-8 w-14 h-14 border-2 border-amber-200/20 rounded-lg -rotate-12 hidden md:block" />
+        <div className="absolute top-10 left-8 w-8 md:w-16 h-8 md:h-16 border-2 border-primary/15 rounded-lg rotate-12" />
+        <div className="absolute top-32 right-12 w-6 md:w-10 h-6 md:h-10 border-2 border-secondary/10 rounded-md -rotate-6" />
+        <div className="absolute bottom-20 left-16 w-6 md:w-12 h-6 md:h-12 border-2 border-primary/10 rounded-lg rotate-45" />
+        <div className="absolute top-1/2 right-1/4 w-10 md:w-20 h-10 md:h-20 border-2 border-primary/5 rounded-xl rotate-12" />
+        <div className="absolute bottom-32 right-8 w-8 md:w-14 h-8 md:h-14 border-2 border-primary/10 rounded-lg -rotate-12" />
+        <div className="absolute top-20 left-1/3 w-3 h-3 rounded-full bg-primary/20" />
+        <div className="absolute bottom-40 right-1/3 w-4 h-4 rounded-full bg-primary/10" />
+        <div className="absolute top-1/3 right-10 w-2 h-2 rounded-full bg-secondary/20" />
       </div>
 
       <div className="container mx-auto px-4 py-4 sm:py-8 md:py-20 relative z-10 max-w-full overflow-hidden">
@@ -98,7 +101,7 @@ const HeroSection = () => {
           <div className="overflow-hidden rounded-xl">
             <div className="flex animate-scroll-left gap-2 sm:gap-3 w-max">
               {[...heroCards, ...heroCards].map((card, i) => (
-                <a href="#apply" key={i} className="flex-shrink-0 w-20 sm:w-36 rounded-xl overflow-hidden border border-border shadow-md hover:shadow-lg transition-shadow">
+                <a href="#apply" key={i} className="flex-shrink-0 w-20 sm:w-36 rounded-xl overflow-hidden border-2 border-white shadow-md hover:shadow-lg transition-shadow">
                   <img src={card.img} alt={card.name} className="w-full h-12 sm:h-20 object-cover" loading="lazy" />
                   <div className="bg-secondary p-1 sm:p-2">
                     <p className="font-heading text-[9px] sm:text-sm font-bold text-white">{card.name}</p>

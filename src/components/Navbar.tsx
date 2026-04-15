@@ -66,6 +66,7 @@ const Navbar = () => {
             <a href="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Blog</a>
             <a href="/faq" className="text-sm font-medium text-foreground hover:text-primary transition-colors">FAQ</a>
             <a href="/contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Contact</a>
+            <a href="/franchise" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Franchise</a>
           </div>
 
           {/* Desktop CTA */}
@@ -136,6 +137,7 @@ const Navbar = () => {
             <a href="/blog" className="block text-sm font-medium text-foreground py-1">Blog</a>
             <a href="/faq" className="block text-sm font-medium text-foreground py-1">FAQ</a>
             <a href="/contact" className="block text-sm font-medium text-foreground py-1">Contact</a>
+            <a href="/franchise" className="block text-sm font-medium text-foreground py-1">Franchise</a>
             <a href="/student-login" className="block text-sm font-medium text-foreground py-1">Student Login</a>
             <div className="border-t border-border pt-3 mt-2">
               <p className="text-xs text-muted-foreground mb-2">Follow Us</p>

@@ -1,30 +1,81 @@
 
 
-## Plan: Hero Section Mobile Layout Like Amity Reference
+## Plan: Gallery Section, Franchise Page, Hero Design Elements, Footer Image, Course Card Outline
 
-Based on the Amity Online reference screenshot, the mobile hero should show:
-- Student image on the RIGHT side next to text (side-by-side layout even on mobile), not in a frame/border — just the raw image
-- Text on the LEFT, smaller and compact
-- No rounded border or shadow frame around the image
+---
 
-### Changes to `src/components/HeroSection.tsx`
+### 1. Image Gallery & Event Carousel Section
 
-1. **Remove image frame on mobile**: Remove `rounded-2xl`, `shadow-2xl`, `border-4 border-primary/20` wrapper on mobile — show raw image. Keep frame on desktop only.
+**New file:** `src/components/GallerySection.tsx`
 
-2. **Side-by-side layout on mobile**: Instead of stacking (image on top, text below), use a 2-column layout on mobile too — text left, image right, like the Amity reference. Use `grid grid-cols-2` on mobile with the image taking less space.
+- Create a section with heading "Our Gallery" and subheading
+- Generate 6-8 gallery images (campus, lab, events, classroom, certificate ceremony, annual day)
+- Display as a carousel/slider with event title overlay on each image
+- Cards show: image, event title, short description
+- Responsive: 1 card mobile, 2 tablet, 3 desktop with horizontal scroll
+- Add to `Index.tsx` between TestimonialsSection and CTABanner2
 
-3. **Mobile layout**: 
-   - Badge + heading + subtitle on left column
-   - Student image on right column (no frame, just `object-cover` with transparent/cutout look)
-   - Buttons, course strip, and stats span full width below
+---
 
-4. **Text sizing**: Keep heading at `text-xl` on mobile, paragraph at `text-xs` — compact like reference
+### 2. Franchise Verification & Information Page
 
-5. **Generate new hero image**: Generate a confident student image with transparent/clean background (like the Amity reference where the student appears without a frame, just placed on the light background)
+**New files:** `src/pages/FranchisePage.tsx`, `src/components/FranchiseCard.tsx`
 
-### Technical Approach
+- Create a page listing authorized franchise centers
+- Each franchise card shows: name, location, verified badge (green checkmark), authorization title
+- Add a search/filter bar at the top so users can search by name or location
+- Hardcoded franchise data (no backend needed) — sample 4-5 franchise entries
+- Verified badge: green shield icon with "Authorized Center" label
+- Add route `/franchise` in `App.tsx`
+- Add "Franchise" link in Navbar menu
 
-- Restructure the grid: on mobile, top section is 2-col (text + image side by side), bottom section is full-width (buttons, course strip, stats)
-- Remove all border/shadow/rounded from image container on mobile using responsive classes
-- Image uses `object-cover` with no container styling on mobile
+---
+
+### 3. Hero Section Design Elements
+
+**File:** `src/components/HeroSection.tsx`
+
+- Show decorative elements on mobile too (currently `hidden md:block`)
+- Add small colored dots, gradient circles, and subtle geometric shapes visible on all screen sizes
+- Add a faint dotted grid pattern or radial gradient in the background for visual depth
+
+---
+
+### 4. Scrollable Course Cards — White Outline
+
+**File:** `src/components/HeroSection.tsx`
+
+- Add `border-2 border-white` or `ring-2 ring-white` to the scrolling course cards in the hero section
+- This makes each card pop against the background
+
+---
+
+### 5. Footer Background Image
+
+**File:** `src/components/Footer.tsx`
+
+- Generate a new, higher-quality dark educational background image for the footer
+- Ensure overlay keeps text readable (`bg-secondary/90`)
+
+---
+
+### 6. Mobile Search Bar
+
+Already exists in `Navbar.tsx` (line 100-112) — confirmed working. No changes needed.
+
+---
+
+### Files Changed
+
+| File | Action |
+|------|--------|
+| `src/components/GallerySection.tsx` | Create — gallery carousel with event titles |
+| `src/pages/FranchisePage.tsx` | Create — franchise listing with verified badges |
+| `src/components/HeroSection.tsx` | Edit — add design elements on mobile, white outline on course cards |
+| `src/components/Footer.tsx` | Edit — new background image |
+| `src/pages/Index.tsx` | Edit — add GallerySection |
+| `src/App.tsx` | Edit — add `/franchise` route |
+| `src/components/Navbar.tsx` | Edit — add "Franchise" link |
+| ~8 gallery images | Generate via AI |
+| 1 footer background image | Generate via AI |
 

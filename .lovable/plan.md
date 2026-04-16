@@ -1,3 +1,5 @@
+
+
 ## Plan: Franchise Inquiry Form/Page, Gallery Background, Hero & Programs Visual Separation
 
 ---
@@ -13,8 +15,6 @@
 - Add route `/franchise-inquiry` in `App.tsx`
 - Add "Become a Franchise" CTA button on existing `FranchisePage.tsx` linking to this page
 - Add link in Navbar menu under Franchise dropdown or as separate item
-
-remove Faq from menu bar desktop view , also make search bar visible in desktop as well
 
 ---
 
@@ -47,14 +47,14 @@ remove Faq from menu bar desktop view , also make search bar visible in desktop 
 
 ### 4. Files Changed
 
-
-| File                                | Action                                                |
-| ----------------------------------- | ----------------------------------------------------- |
-| `src/pages/FranchiseInquiry.tsx`    | Create — franchise inquiry form page                  |
-| `src/components/GallerySection.tsx` | Edit — add background image, white text               |
+| File | Action |
+|------|--------|
+| `src/pages/FranchiseInquiry.tsx` | Create — franchise inquiry form page |
+| `src/components/GallerySection.tsx` | Edit — add background image, white text |
 | `src/components/CourseCarousel.tsx` | Edit — modern card style, distinct section background |
-| `src/components/HeroSection.tsx`    | Edit — add bottom divider/wave                        |
-| `src/pages/FranchisePage.tsx`       | Edit — add CTA to franchise inquiry                   |
-| `src/App.tsx`                       | Edit — add `/franchise-inquiry` route                 |
-| `src/components/Navbar.tsx`         | Edit — add franchise inquiry link                     |
-| 1 gallery background image          | Generate                                              |
+| `src/components/HeroSection.tsx` | Edit — add bottom divider/wave |
+| `src/pages/FranchisePage.tsx` | Edit — add CTA to franchise inquiry |
+| `src/App.tsx` | Edit — add `/franchise-inquiry` route |
+| `src/components/Navbar.tsx` | Edit — add franchise inquiry link |
+| 1 gallery background image | Generate |
+
